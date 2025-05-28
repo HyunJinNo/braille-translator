@@ -1,0 +1,36 @@
+---
+title: 'Feat: 기능명'
+labels: Feat
+assignees: ''
+---
+
+## ☑️ 개발 유형
+
+- [x] Front-end
+
+## ✔️ PR 유형
+
+- [ ] Chore: 빌드 부분 혹은 패키지 매니저 수정
+- [ ] Comment: 주석 관련 작업
+- [ ] Design: CSS 등 사용자 UI 디자인 변경
+- [ ] Docs: 문서 관련 작업
+- [ ] Feat: 새로운 기능 추가
+- [ ] Fix: 버그 수정
+- [ ] Refactor: 기존 기능에 영향을 주지 않는 변경사항 (Ex. 오타 수정, 탭 사이즈 변경, 변수명 변경, 코드 리팩토링 등)
+- [ ] Release: 배포 관련 작업
+- [ ] Remove: 파일 혹은 폴더 삭제
+- [ ] Rename: 파일 혹은 폴더명 수정
+- [ ] Test: 테스트 추가 혹은 테스트 리팩토링
+
+## 📝 작업 내용
+
+이번 PR에서 작업한 내용을 간략히 설명해 주세요.
+
+- [x] 구현한 기능 1
+- [x] 구현한 기능 2
+
+## #️⃣ Related Issue
+
+해당 Pull Request과 관련된 Issue Link를 작성해 주세요.
+
+Ex. close #123
