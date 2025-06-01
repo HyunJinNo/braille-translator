@@ -25,7 +25,7 @@ export const BottomTabs = () => {
         component={HomeScreen}
         options={{
           title: '홈',
-          tabBarActiveTintColor: COLOR['fuschia-400'],
+          tabBarActiveTintColor: COLOR['fuchsia-400'],
           tabBarIcon: HomeIcon,
         }}
       />
