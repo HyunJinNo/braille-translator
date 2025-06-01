@@ -5,6 +5,7 @@ import { SettingScreen } from '@src/pages/setting';
 import { HistoryScreen } from '@src/pages/history';
 import { tw } from '@src/shared/lib/utils';
 import { HistoryIcon, HomeIcon, SettingIcon } from '@src/shared/ui/icon';
+import { COLOR } from '@src/shared/config';
 
 const Tab = createBottomTabNavigator<RootStackParamList>();
 
@@ -16,7 +17,7 @@ export const BottomTabs = () => {
         headerTitleStyle: tw`text-lg`,
         tabBarStyle: tw`h-14`,
         tabBarLabelStyle: tw`text-xs`,
-        tabBarInactiveTintColor: '#9CA3AF',
+        tabBarInactiveTintColor: COLOR['gray-400'],
         headerShadowVisible: false,
       }}>
       <Tab.Screen
@@ -24,7 +25,7 @@ export const BottomTabs = () => {
         component={HomeScreen}
         options={{
           title: '홈',
-          tabBarActiveTintColor: '#E879F9',
+          tabBarActiveTintColor: COLOR['fuschia-400'],
           tabBarIcon: HomeIcon,
         }}
       />
@@ -33,7 +34,7 @@ export const BottomTabs = () => {
         component={HistoryScreen}
         options={{
           title: '번역 기록',
-          tabBarActiveTintColor: '#34D399',
+          tabBarActiveTintColor: COLOR['green-400'],
           tabBarIcon: HistoryIcon,
         }}
       />
@@ -42,7 +43,7 @@ export const BottomTabs = () => {
         component={SettingScreen}
         options={{
           title: '설정',
-          tabBarActiveTintColor: '#60A5FA',
+          tabBarActiveTintColor: COLOR['blue-400'],
           tabBarIcon: SettingIcon,
         }}
       />
