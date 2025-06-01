@@ -15,6 +15,7 @@ export const HomeButtonList = () => {
           title={item.title}
           description={item.description}
           buttonStyle={item.buttonStyle}
+          rippleColor={item.rippleColor}
           textColor={item.textColor}
         />
       )}

@@ -13,6 +13,7 @@ interface HomeButtonProps {
   title: string;
   description: string[];
   buttonStyle?: string;
+  rippleColor?: string;
   textColor?: string;
   onPress?: ((event: GestureResponderEvent) => void) | null;
 }
@@ -22,6 +23,7 @@ export const HomeButton = ({
   title,
   description,
   buttonStyle,
+  rippleColor,
   textColor,
   onPress,
 }: HomeButtonProps) => {
@@ -31,6 +33,7 @@ export const HomeButton = ({
         buttonStyle ?? 'border-fuchsia-200 bg-fuchsia-50',
         'h-75 flex flex-1 flex-col items-center rounded-2xl border pt-12 shadow',
       )}
+      android_ripple={{ color: rippleColor }}
       onPress={onPress}>
       <Image style={tw`aspect-square h-20`} source={source} />
       <Text
