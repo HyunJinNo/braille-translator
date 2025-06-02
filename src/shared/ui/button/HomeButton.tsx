@@ -35,7 +35,7 @@ export const HomeButton = ({
       )}
       android_ripple={{ color: rippleColor }}
       onPress={onPress}>
-      <Image style={tw`aspect-square h-20`} source={source} />
+      <Image style={tw`h-20 w-20`} source={source} />
       <Text
         style={tw.style(
           textColor ?? 'text-fuchsia-400',
