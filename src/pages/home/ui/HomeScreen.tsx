@@ -1,5 +1,5 @@
 import { tw } from '@src/shared/lib/utils';
-import { HomeButtonList } from '@src/widgets/HomeButtonList';
+import { HomeButtonList } from '@src/widgets/homeButtonList';
 import { View } from 'react-native';
 
 export const HomeScreen = () => {

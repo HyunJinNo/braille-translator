@@ -42,4 +42,4 @@ export const HOME_BUTTON_DATA: ItemData[] = [
     rippleColor: COLOR['cyan-200'],
     textColor: 'text-cyan-400',
   },
-];
+] as const;
