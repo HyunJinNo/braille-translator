@@ -19,6 +19,7 @@
     "react-native-safe-area-context": "^5.4.1",
     "react-native-screens": "^4.11.0",
     "react-native-splash-screen": "^3.3.0",
+    "react-native-vision-camera": "^4.6.4",
     "twrnc": "^4.8.0"
   },
   "devDependencies": {
