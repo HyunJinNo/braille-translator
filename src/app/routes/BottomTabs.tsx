@@ -14,7 +14,7 @@ export const BottomTabs = () => {
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
-        headerTitleStyle: tw`text-lg`,
+        headerTitleStyle: tw`ml-px text-lg`,
         tabBarStyle: tw`h-14`,
         tabBarLabelStyle: tw`text-xs`,
         tabBarInactiveTintColor: COLOR['gray-400'],

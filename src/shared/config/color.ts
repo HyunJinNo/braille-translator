@@ -4,6 +4,7 @@ export const COLOR = {
   'gray-400': '#9CA3AF',
   'green-200': '#A7F3D0',
   'green-400': '#34D399',
+  'blue-50': '#EFF6FF',
   'blue-200': '#BFDBFE',
   'blue-400': '#60A5FA',
   'cyan-200': '#A5F3FC',
