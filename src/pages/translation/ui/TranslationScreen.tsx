@@ -28,14 +28,26 @@ export const TranslationScreen = () => {
   }, [hasPermission, navigation, requestPermission]);
 
   return (
-    <View style={tw`flex h-full flex-col justify-between bg-white`}>
+    <View style={tw`flex h-full flex-col justify-between bg-black`}>
       {!device ? (
         <View style={tw`w-full flex-1 bg-black`} />
       ) : (
-        <View style={tw`flex-10 relative`}>
+        <View style={tw`relative flex-1`}>
           <Camera style={tw`h-full w-full`} device={device} isActive={true} />
           <View
-            style={tw`absolute left-4 right-4 top-1/2 h-24 -translate-y-12 rounded-2xl border-2 border-white`}
+            style={tw`absolute bottom-1/2 left-0 right-0 top-0 -translate-y-12 bg-black/50`}
+          />
+          <View
+            style={tw`absolute left-0 top-1/2 h-24 w-4 -translate-y-12 bg-black/50`}
+          />
+          <View
+            style={tw`absolute right-0 top-1/2 h-24 w-4 -translate-y-12 bg-black/50`}
+          />
+          <View
+            style={tw`absolute bottom-0 left-0 right-0 top-1/2 translate-y-12 bg-black/50`}
+          />
+          <View
+            style={tw`absolute left-4 right-4 top-1/2 h-24 -translate-y-12 border-2 border-white`}
           />
           <Text
             style={tw`absolute left-0 right-0 top-1/2 translate-y-14 text-center text-base text-white`}>
@@ -43,7 +55,7 @@ export const TranslationScreen = () => {
           </Text>
         </View>
       )}
-      <View style={tw`px-4`}>
+      <View style={tw`bg-white px-4`}>
         <ControlBar />
         <TranslationTextViewer />
       </View>
