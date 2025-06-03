@@ -8,4 +8,4 @@ export const COLOR = {
   'blue-200': '#BFDBFE',
   'blue-400': '#60A5FA',
   'cyan-200': '#A5F3FC',
-};
+} as const;
