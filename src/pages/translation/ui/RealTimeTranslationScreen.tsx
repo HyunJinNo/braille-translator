@@ -10,7 +10,7 @@ import {
   useCameraPermission,
 } from 'react-native-vision-camera';
 
-export const TranslationScreen = () => {
+export const RealTimeTranslationScreen = () => {
   const device = useCameraDevice('back');
   const { hasPermission, requestPermission } = useCameraPermission();
   const navigation = useNavigation();
