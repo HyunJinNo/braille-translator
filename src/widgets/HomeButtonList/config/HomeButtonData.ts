@@ -7,6 +7,8 @@ interface ItemData {
   buttonStyle: string;
   rippleColor: string;
   textColor: string;
+  screen: 'PictureTranslation' | 'RealTimeTranslation';
+  headerTitle: string;
 }
 
 export const HOME_BUTTON_DATA: ItemData[] = [
@@ -17,6 +19,8 @@ export const HOME_BUTTON_DATA: ItemData[] = [
     buttonStyle: 'border-fuchsia-200 bg-fuchsia-50',
     rippleColor: COLOR['fuchsia-200'],
     textColor: 'text-fuchsia-400',
+    screen: 'RealTimeTranslation',
+    headerTitle: '한글 번역',
   },
   {
     source: require('@assets/icons/braille-scan-icon.png'),
@@ -25,6 +29,8 @@ export const HOME_BUTTON_DATA: ItemData[] = [
     buttonStyle: 'border-green-200 bg-green-50',
     rippleColor: COLOR['green-200'],
     textColor: 'text-green-400',
+    screen: 'RealTimeTranslation',
+    headerTitle: '점자 번역',
   },
   {
     source: require('@assets/icons/hangul-to-braille-icon.png'),
@@ -33,6 +39,8 @@ export const HOME_BUTTON_DATA: ItemData[] = [
     buttonStyle: 'border-blue-200 bg-blue-50',
     rippleColor: COLOR['blue-200'],
     textColor: 'text-blue-400',
+    screen: 'PictureTranslation',
+    headerTitle: '한글 이미지 번역',
   },
   {
     source: require('@assets/icons/braille-to-hangul-icon.png'),
@@ -41,5 +49,7 @@ export const HOME_BUTTON_DATA: ItemData[] = [
     buttonStyle: 'border-cyan-200 bg-cyan-50',
     rippleColor: COLOR['cyan-200'],
     textColor: 'text-cyan-400',
+    screen: 'PictureTranslation',
+    headerTitle: '점자 이미지 번역',
   },
 ] as const;
