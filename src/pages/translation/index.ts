@@ -1,1 +1,2 @@
-export { TranslationScreen } from './ui/TranslationScreen';
+export { PictureTranslationScreen } from './ui/PictureTranslationScreen';
+export { RealTimeTranslationScreen } from './ui/RealTimeTranslationScreen';

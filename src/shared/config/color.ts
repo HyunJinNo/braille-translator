@@ -1,6 +1,7 @@
 export const COLOR = {
   'fuchsia-200': '#F5D0FE',
   'fuchsia-400': '#E879F9',
+  'gray-200': '#E5E7EB',
   'gray-400': '#9CA3AF',
   'green-200': '#A7F3D0',
   'green-400': '#34D399',

@@ -3,8 +3,7 @@ import { Image, Pressable, View } from 'react-native';
 
 export const ControlBar = () => {
   return (
-    <View
-      style={tw`h-15 flex flex-row items-center gap-3 border-b border-b-gray-400 bg-white`}>
+    <View style={tw`h-15 flex flex-row items-center gap-3 bg-white`}>
       <Pressable
         children={({ pressed }) => (
           <Image
