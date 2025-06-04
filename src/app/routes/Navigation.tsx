@@ -25,7 +25,7 @@ export const Navigation = () => {
           options={({ route }) => ({
             title: route.params.headerTitle,
             headerTitleStyle: tw`text-lg`,
-            headerShadowVisible: false,
+            headerTransparent: true,
           })}
         />
         <Stack.Screen
