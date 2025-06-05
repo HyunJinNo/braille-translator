@@ -7,6 +7,8 @@ import {
   JUNGSUNG,
   NUMBER,
   NUMBER_START,
+  PUNCTUATION,
+  QUOTATION,
 } from './mapping';
 
 /**
@@ -101,8 +103,8 @@ const JUNGSUNG_CODE = 28;
 let flag10 = false; // 점자 규정 제 10항 확인용
 let flag11 = false; // 점자 규정 제 11항 확인용
 let flag17 = false; // 점자 규정 제 17항 확인용
-const bQuot = 0; // big quotation index
-const sQuot = 2; // small quotation index
+let bQuot = 0; // big quotation index
+let sQuot = 2; // small quotation index
 
 let translatedText = '';
 
@@ -291,6 +293,7 @@ function checkContraction3(
   } catch (error) {
     console.error(error);
   }
+
   return false;
 }
 
@@ -314,5 +317,34 @@ function checkNumber(word: string, index: number) {
     }
     return true;
   }
+  return false;
+}
+
+function checkPunctuation(word: string, index: number) {
+  const punc = word[index];
+
+  if (Object.keys(PUNCTUATION).includes(punc)) {
+    translatedText += PUNCTUATION[punc as keyof typeof PUNCTUATION];
+    return true;
+  } else if (punc === '"') {
+    translatedText += QUOTATION[bQuot];
+
+    if (bQuot === 0) {
+      bQuot++;
+    } else {
+      bQuot--;
+    }
+    return true;
+  } else if (punc === "'") {
+    translatedText += QUOTATION[sQuot];
+
+    if (sQuot === 2) {
+      sQuot++;
+    } else {
+      sQuot--;
+    }
+    return true;
+  }
+
   return false;
 }
