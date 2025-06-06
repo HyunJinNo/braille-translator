@@ -18,6 +18,17 @@ export const CHOSUNG = {
   ㅌ: '⠓',
   ㅍ: '⠙',
   ㅎ: '⠚',
+  ㄳ: '⠈⠠',
+  ㄵ: '⠉⠨',
+  ㄶ: '⠉⠚',
+  ㄺ: '⠐⠈',
+  ㄻ: '⠐⠑',
+  ㄼ: '⠐⠘',
+  ㄽ: '⠐⠠',
+  ㄾ: '⠐⠓',
+  ㄿ: '⠐⠙',
+  ㅀ: '⠐⠚',
+  ㅄ: '⠘⠠',
 } as const;
 
 export const JUNGSUNG = {
@@ -45,6 +56,7 @@ export const JUNGSUNG = {
 } as const;
 
 export const JONGSUNG = {
+  ' ': ' ',
   ㄱ: '⠁',
   ㄴ: '⠒',
   ㄷ: '⠔',
@@ -167,7 +179,3 @@ export const NUMBER = {
   '9': '⠊',
   '0': '⠚',
 } as const;
-
-export const CHOSUNG_START = '⠿';
-
-export const NUMBER_START = '⠼';

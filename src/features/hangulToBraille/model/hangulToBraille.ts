@@ -1,112 +1,26 @@
 import { assemble } from 'es-hangul';
 import {
   CHOSUNG,
-  CHOSUNG_START,
   CONTRACTION,
   DECOMPOSE,
   JONGSUNG,
   JUNGSUNG,
   NUMBER,
-  NUMBER_START,
   PUNCTUATION,
   QUOTATION,
-} from './mapping';
+} from '../config/mapping';
+import {
+  CHOSUNG_LIST,
+  JONGSUNG_LIST,
+  JUNGSUNG_LIST,
+} from '../config/letterList';
+import { BASE_CODE, CHOSUNG_CODE, JUNGSUNG_CODE } from '../config/code';
 
-/**
- * 초성 목록
- */
-const CHOSUNG_LIST = [
-  'ㄱ',
-  'ㄲ',
-  'ㄴ',
-  'ㄷ',
-  'ㄸ',
-  'ㄹ',
-  'ㅁ',
-  'ㅂ',
-  'ㅃ',
-  'ㅅ',
-  'ㅆ',
-  'ㅇ',
-  'ㅈ',
-  'ㅉ',
-  'ㅊ',
-  'ㅋ',
-  'ㅌ',
-  'ㅍ',
-  'ㅎ',
-] as const;
-
-/**
- * 중성 목록
- */
-const JUNGSUNG_LIST = [
-  'ㅏ',
-  'ㅐ',
-  'ㅑ',
-  'ㅒ',
-  'ㅓ',
-  'ㅔ',
-  'ㅕ',
-  'ㅖ',
-  'ㅗ',
-  'ㅘ',
-  'ㅙ',
-  'ㅚ',
-  'ㅛ',
-  'ㅜ',
-  'ㅝ',
-  'ㅞ',
-  'ㅟ',
-  'ㅠ',
-  'ㅡ',
-  'ㅢ',
-  'ㅣ',
-] as const;
-
-/**
- * 종성 목록
- */
-const JONGSUNG_LIST = [
-  // ' ', TODO: 삭제 필요
-  'ㄱ',
-  'ㄲ',
-  'ㄳ',
-  'ㄴ',
-  'ㄵ',
-  'ㄶ',
-  'ㄷ',
-  'ㄹ',
-  'ㄺ',
-  'ㄻ',
-  'ㄼ',
-  'ㄽ',
-  'ㄾ',
-  'ㄿ',
-  'ㅀ',
-  'ㅁ',
-  'ㅂ',
-  'ㅄ',
-  'ㅅ',
-  'ㅆ',
-  'ㅇ',
-  'ㅈ',
-  'ㅊ',
-  'ㅋ',
-  'ㅌ',
-  'ㅍ',
-  'ㅎ',
-] as const;
-
-const BASE_CODE = 44032;
-const CHOSUNG_CODE = 588;
-const JUNGSUNG_CODE = 28;
 let flag10 = false; // 점자 규정 제 10항 확인용
 let flag11 = false; // 점자 규정 제 11항 확인용
 let flag17 = false; // 점자 규정 제 17항 확인용
 let bQuot = 0; // big quotation index
 let sQuot = 2; // small quotation index
-
 let translatedText = '';
 
 function extractWords(text: string) {
@@ -114,7 +28,7 @@ function extractWords(text: string) {
 }
 
 function checkContraction(word: string, index: number) {
-  const character = word.charAt(index);
+  const character = word[index];
 
   if (
     character === '나' ||
@@ -129,6 +43,7 @@ function checkContraction(word: string, index: number) {
   ) {
     translatedText += CONTRACTION[character];
     flag10 = true;
+    flag17 = true;
     return 1;
   }
 
@@ -214,22 +129,8 @@ function checkContraction2(
   // 종성이 존재하는 경우
   if (jongsung.trim() !== '') {
     // 종성이 double 형태인 경우
-    if (
-      jongsung === 'ㄲ' ||
-      jongsung === 'ㄳ' ||
-      jongsung === 'ㄵ' ||
-      jongsung === 'ㄶ' ||
-      jongsung === 'ㄺ' ||
-      jongsung === 'ㄻ' ||
-      jongsung === 'ㄼ' ||
-      jongsung === 'ㄽ' ||
-      jongsung === 'ㄾ' ||
-      jongsung === 'ㄿ' ||
-      jongsung === 'ㅀ' ||
-      jongsung === 'ㅄ' ||
-      jongsung === 'ㅆ'
-    ) {
-      doubleJongsung = DECOMPOSE[jongsung];
+    if (Object.keys(DECOMPOSE).includes(jongsung)) {
+      doubleJongsung = DECOMPOSE[jongsung as keyof typeof DECOMPOSE];
       jasoList.push(doubleJongsung[0]); // double의 첫 자모 추가
     } else {
       jasoList.push(jongsung); // 종성이 낱개 자모인 경우 해당 문자 추가
@@ -256,7 +157,7 @@ function checkContraction2(
 
       // double인 경우 낱개 자모 하나 더 추가
       if (doubleJongsung.length > 1) {
-        translatedText += JONGSUNG[doubleJongsung[0] as keyof typeof JONGSUNG];
+        translatedText += JONGSUNG[doubleJongsung[1] as keyof typeof JONGSUNG];
       }
       return true;
     }
@@ -308,13 +209,11 @@ function checkNumber(word: string, index: number) {
         translatedText += NUMBER[word[index] as keyof typeof NUMBER];
       } else {
         // 처음 시작하는 숫자일 경우 수표 추가
-        translatedText +=
-          NUMBER_START + NUMBER[word[index] as keyof typeof NUMBER];
+        translatedText += '⠼' + NUMBER[word[index] as keyof typeof NUMBER];
       }
     } else {
       // 첫 인덱스이며 숫자인 경우 수표 추가
-      translatedText +=
-        NUMBER_START + NUMBER[word[index] as keyof typeof NUMBER];
+      translatedText += '⠼' + NUMBER[word[index] as keyof typeof NUMBER];
     }
     return true;
   }
@@ -479,7 +378,7 @@ function checkCharacter(word: string, index: number) {
     }
     // 자음 혹은 모음 하나만 있을 때
     else {
-      translatedText += CHOSUNG_START;
+      translatedText += '⠿';
 
       // 초성 자음인 경우
       if (Object.keys(CHOSUNG).includes(key)) {
@@ -525,6 +424,13 @@ export function checkValidity(text: string) {
 }
 
 export function translate(text: string) {
+  flag10 = false; // 점자 규정 제 10항 확인용
+  flag11 = false; // 점자 규정 제 11항 확인용
+  flag17 = false; // 점자 규정 제 17항 확인용
+  bQuot = 0; // big quotation index
+  sQuot = 2; // small quotation index
+  translatedText = '';
+
   text.split('\n').forEach((line) => {
     extractWords(line).forEach((word) => {
       let index = 0;

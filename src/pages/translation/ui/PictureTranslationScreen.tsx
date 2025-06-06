@@ -1,6 +1,7 @@
 import TextRecognition, {
   TextRecognitionScript,
 } from '@react-native-ml-kit/text-recognition';
+import { translate } from '@src/features/hangulToBraille';
 import { tw } from '@src/shared/lib/utils';
 import { ImageSelector } from '@src/widgets/imageSelector';
 import { TranslationTextViewer } from '@src/widgets/translationTextViewer';
@@ -12,6 +13,7 @@ export const PictureTranslationScreen = () => {
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState<string>();
   const [recognizedText, setRecognizedText] = useState('');
+  const [translatedText, setTranslatedText] = useState('');
 
   const handleImageUpload = async () => {
     const result = await launchImageLibrary({ mediaType: 'photo' });
@@ -25,6 +27,7 @@ export const PictureTranslationScreen = () => {
         TextRecognitionScript.KOREAN,
       );
       setRecognizedText(textRecognitionResult.text);
+      setTranslatedText(translate(textRecognitionResult.text));
       setLoading(false);
     }
   };
@@ -44,7 +47,7 @@ export const PictureTranslationScreen = () => {
       <View style={tw`px-4`}>
         <TranslationTextViewer
           recognizedText={recognizedText}
-          translatedText="TODO"
+          translatedText={translatedText}
         />
       </View>
     </View>
