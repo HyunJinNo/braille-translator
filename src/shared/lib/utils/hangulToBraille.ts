@@ -1,6 +1,7 @@
 import { assemble } from 'es-hangul';
 import {
   CHOSUNG,
+  CHOSUNG_START,
   CONTRACTION,
   DECOMPOSE,
   JONGSUNG,
@@ -67,7 +68,7 @@ const JUNGSUNG_LIST = [
  * 종성 목록
  */
 const JONGSUNG_LIST = [
-  ' ',
+  // ' ', TODO: 삭제 필요
   'ㄱ',
   'ㄲ',
   'ㄳ',
@@ -347,4 +348,224 @@ function checkPunctuation(word: string, index: number) {
   }
 
   return false;
+}
+
+function checkCharacter(word: string, index: number) {
+  const key = word[index];
+  let charCode = 0;
+  let char1 = 0;
+  let char2 = 0;
+  let char3 = 0;
+
+  if (/[ㄱ-ㅎㅏ-ㅣ가-힣]+/.test(key)) {
+    charCode = key.charCodeAt(0) - BASE_CODE;
+
+    // 완전한 글자인 경우
+    if (charCode >= 0) {
+      char1 = Math.floor(charCode / CHOSUNG_CODE);
+      char2 = Math.floor((charCode - CHOSUNG_CODE * char1) / JUNGSUNG_CODE);
+      char3 = Math.floor(
+        charCode - CHOSUNG_CODE * char1 - JUNGSUNG_CODE * char2,
+      );
+
+      const chosung = CHOSUNG_LIST[char1];
+      const jungsung = JUNGSUNG_LIST[char2];
+      const jongsung = JONGSUNG_LIST[char3];
+
+      // 모음 시작
+      if (chosung === 'ㅇ' && flag17) {
+        flag11 = false;
+        if (char3 === 0) {
+          flag10 = true;
+          if (
+            jungsung === 'ㅑ' ||
+            jungsung === 'ㅘ' ||
+            jungsung === 'ㅜ' ||
+            jungsung === 'ㅝ'
+          ) {
+            flag11 = true;
+          }
+        }
+
+        // "예"로 끝
+        if (jungsung === 'ㅖ') {
+          translatedText += '⠤';
+        } else {
+          translatedText += '⠣';
+        }
+        flag17 = false;
+      }
+
+      //늘 → ㅁ ㄴ+'을' 과 같은 약어가 없는 경우
+      if (!checkContraction2(chosung, jungsung, jongsung)) {
+        // 감 → '가'+ㅁ 과 같은 약어가 없는 경우
+        if (!checkContraction3(chosung, jungsung, jongsung)) {
+          // 약자, 약어 없이 초성, 중성, 종성 모든 파트 1:1 매핑
+          // 규정 제 10항
+          if (flag10 && chosung === 'ㅇ' && jungsung === 'ㅖ') {
+            translatedText += '⠤';
+            translatedText += CHOSUNG[chosung];
+            translatedText += JUNGSUNG[jungsung];
+
+            if (char3 !== 0) {
+              translatedText += JONGSUNG[jongsung];
+              flag10 = false;
+            } else {
+              flag10 = true;
+            }
+
+            flag11 = false;
+            flag17 = false;
+          }
+          // 규정 제 11항
+          else if (flag10 && flag11 && chosung === 'ㅇ' && jungsung === 'ㅐ') {
+            translatedText += '⠤';
+            translatedText += CHOSUNG[chosung];
+            translatedText += JUNGSUNG[jungsung];
+
+            if (char3 !== 0) {
+              translatedText += JONGSUNG[jongsung];
+              flag10 = false;
+            }
+            flag11 = false;
+            flag17 = false;
+          }
+          // 1:1 매핑 케이스
+          else {
+            translatedText += CHOSUNG[chosung];
+
+            // 종성 자음이 존재할 경우에만 추가
+            if (char3 !== 0) {
+              if (
+                jungsung === 'ㅓ' &&
+                jongsung === 'ㅇ' &&
+                (chosung === 'ㅅ' ||
+                  chosung === 'ㅆ' ||
+                  chosung === 'ㅈ' ||
+                  chosung === 'ㅉ' ||
+                  chosung === 'ㅊ')
+              ) {
+                translatedText += '⠻'; // 규정 제 16항
+              } else {
+                translatedText += JUNGSUNG[jungsung];
+                translatedText += JONGSUNG[jongsung];
+              }
+
+              flag10 = false;
+              flag11 = false;
+              flag17 = false;
+            }
+            // 종성 자음이 존재하지 않고 모음까지만 존재하는 경우
+            else {
+              translatedText += JUNGSUNG[jungsung];
+              flag10 = true;
+
+              if (
+                jungsung === 'ㅑ' ||
+                jungsung === 'ㅘ' ||
+                jungsung === 'ㅜ' ||
+                jungsung === 'ㅝ'
+              ) {
+                flag11 = true;
+              }
+
+              flag17 = false;
+            }
+          }
+        }
+      }
+
+      return true;
+    }
+    // 자음 혹은 모음 하나만 있을 때
+    else {
+      translatedText += CHOSUNG_START;
+
+      // 초성 자음인 경우
+      if (Object.keys(CHOSUNG).includes(key)) {
+        if (Object.keys(DECOMPOSE).includes(key)) {
+          translatedText += DECOMPOSE[key as keyof typeof DECOMPOSE];
+        } else {
+          translatedText += CHOSUNG[key as keyof typeof CHOSUNG];
+        }
+      }
+      // 중성 모음인 경우
+      else {
+        translatedText += JUNGSUNG[key as keyof typeof JUNGSUNG];
+      }
+
+      flag10 = false;
+      flag11 = false;
+      flag17 = false;
+      return true;
+    }
+  }
+
+  return false;
+}
+
+export function checkValidity(text: string) {
+  if (checkContraction(text, 0) !== 0) {
+    return true;
+  }
+
+  if (checkNumber(text, 0)) {
+    return true;
+  }
+
+  if (checkPunctuation(text, 0)) {
+    return true;
+  }
+
+  if (checkCharacter(text, 0)) {
+    return true;
+  }
+
+  return false;
+}
+
+export function translate(text: string) {
+  text.split('\n').forEach((line) => {
+    extractWords(line).forEach((word) => {
+      let index = 0;
+      const length = word.length;
+
+      while (index < length) {
+        const checkCont = checkContraction(word, index);
+
+        if (checkCont !== 0) {
+          index += checkCont;
+          continue;
+        }
+
+        if (checkNumber(word, index)) {
+          index++;
+          flag10 = false;
+          flag11 = false;
+          flag17 = false;
+          continue;
+        }
+
+        if (checkPunctuation(word, index)) {
+          index++;
+          flag10 = false;
+          flag11 = false;
+          flag17 = false;
+          continue;
+        }
+
+        checkCharacter(word, index);
+        index++;
+      }
+
+      translatedText += ' ';
+      flag10 = false;
+      flag11 = false;
+      flag17 = false;
+    });
+
+    translatedText += '\n';
+  });
+
+  return translatedText;
 }
