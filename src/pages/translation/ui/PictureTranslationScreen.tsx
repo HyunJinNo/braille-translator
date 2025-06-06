@@ -1,3 +1,7 @@
+import TextRecognition, {
+  TextRecognitionScript,
+} from '@react-native-ml-kit/text-recognition';
+import { translate } from '@src/features/hangulToBraille';
 import { tw } from '@src/shared/lib/utils';
 import { ImageSelector } from '@src/widgets/imageSelector';
 import { TranslationTextViewer } from '@src/widgets/translationTextViewer';
@@ -8,18 +12,23 @@ import { launchImageLibrary } from 'react-native-image-picker';
 export const PictureTranslationScreen = () => {
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState<string>();
+  const [recognizedText, setRecognizedText] = useState('');
+  const [translatedText, setTranslatedText] = useState('');
 
   const handleImageUpload = async () => {
     const result = await launchImageLibrary({ mediaType: 'photo' });
 
-    if (result.assets) {
+    if (result.assets && result.assets[0].uri) {
       setImage(result.assets[0].uri);
-
-      // TODO: 수정 필요
       setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000);
+
+      const textRecognitionResult = await TextRecognition.recognize(
+        result.assets[0].uri,
+        TextRecognitionScript.KOREAN,
+      );
+      setRecognizedText(textRecognitionResult.text);
+      setTranslatedText(translate(textRecognitionResult.text));
+      setLoading(false);
     }
   };
 
@@ -32,11 +41,14 @@ export const PictureTranslationScreen = () => {
           <Text style={tw`text-xl font-semibold text-white`}>분석 중...</Text>
         </View>
       )}
-      <View style={tw`0 mt-14 flex-1 items-center justify-center bg-white`}>
+      <View style={tw`mt-14 flex-1 items-center justify-center bg-white`}>
         <ImageSelector image={image} onPress={handleImageUpload} />
       </View>
       <View style={tw`px-4`}>
-        <TranslationTextViewer />
+        <TranslationTextViewer
+          recognizedText={recognizedText}
+          translatedText={translatedText}
+        />
       </View>
     </View>
   );

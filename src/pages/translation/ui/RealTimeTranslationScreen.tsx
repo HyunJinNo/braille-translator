@@ -57,7 +57,7 @@ export const RealTimeTranslationScreen = () => {
       )}
       <View style={tw`bg-white px-4`}>
         <ControlBar />
-        <TranslationTextViewer />
+        <TranslationTextViewer translatedText="" recognizedText="" />
       </View>
     </View>
   );
