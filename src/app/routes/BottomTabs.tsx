@@ -2,10 +2,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { RootStackParamList } from './navigationTypes';
 import { HomeScreen } from '@src/pages/home';
 import { SettingScreen } from '@src/pages/setting';
-import { HistoryScreen } from '@src/pages/history';
 import { tw } from '@src/shared/lib/utils';
 import { HistoryIcon, HomeIcon, SettingIcon } from '@src/shared/ui/icon';
 import { COLOR } from '@src/shared/config';
+import { TopTabs } from './TopTabs';
 
 const Tab = createBottomTabNavigator<RootStackParamList>();
 
@@ -30,8 +30,8 @@ export const BottomTabs = () => {
         }}
       />
       <Tab.Screen
-        name="History"
-        component={HistoryScreen}
+        name="topTabs"
+        component={TopTabs}
         options={{
           title: '번역 기록',
           tabBarActiveTintColor: COLOR['green-400'],
