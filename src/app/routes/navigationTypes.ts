@@ -3,8 +3,10 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export type RootStackParamList = {
   BottomTabs: undefined;
+  topTabs: undefined;
   Home: undefined;
-  History: undefined;
+  HangulToBrailleHistory: undefined;
+  BrailleToHangulHistory: undefined;
   Setting: undefined;
   PictureTranslation: { headerTitle: string };
   RealTimeTranslation: { headerTitle: string };

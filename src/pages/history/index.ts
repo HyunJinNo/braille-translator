@@ -1,1 +1,2 @@
-export { HistoryScreen } from './ui/HistoryScreen';
+export { BrailleToHangulHistoryScreen } from './ui/BrailleToHangulHistoryScreen';
+export { HangulToBrailleHistoryScreen } from './ui/HangulToBrailleHistoryScreen';
