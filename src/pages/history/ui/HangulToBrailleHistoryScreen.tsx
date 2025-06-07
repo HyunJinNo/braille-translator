@@ -1,9 +1,14 @@
+import { tw } from '@src/shared/lib/utils';
+import { BookmarkButton } from '@src/shared/ui/button';
 import { Text, View } from 'react-native';
 
 export const HangulToBrailleHistoryScreen = () => {
   return (
-    <View>
-      <Text>한글→점자</Text>
+    <View style={tw`flex h-full flex-col bg-white px-4 pt-8`}>
+      <View style={tw`flex flex-row items-center justify-between`}>
+        <Text style={tw`text-lg font-semibold`}>목록</Text>
+        <BookmarkButton />
+      </View>
     </View>
   );
 };

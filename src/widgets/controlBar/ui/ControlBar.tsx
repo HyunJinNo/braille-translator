@@ -4,8 +4,8 @@ import { Image, Pressable, View } from 'react-native';
 export const ControlBar = () => {
   return (
     <View style={tw`h-15 flex flex-row items-center gap-3 bg-white`}>
-      <Pressable
-        children={({ pressed }) => (
+      <Pressable>
+        {({ pressed }) => (
           <Image
             style={tw`h-10 w-10`}
             source={
@@ -15,9 +15,9 @@ export const ControlBar = () => {
             }
           />
         )}
-      />
-      <Pressable
-        children={({ pressed }) => (
+      </Pressable>
+      <Pressable>
+        {({ pressed }) => (
           <Image
             style={tw`h-10 w-10`}
             source={
@@ -27,9 +27,9 @@ export const ControlBar = () => {
             }
           />
         )}
-      />
-      <Pressable
-        children={({ pressed }) => (
+      </Pressable>
+      <Pressable>
+        {({ pressed }) => (
           <Image
             style={tw`h-10 w-10`}
             source={
@@ -39,9 +39,9 @@ export const ControlBar = () => {
             }
           />
         )}
-      />
-      <Pressable
-        children={({ pressed }) => (
+      </Pressable>
+      <Pressable>
+        {({ pressed }) => (
           <Image
             style={tw`h-10 w-10`}
             source={
@@ -51,9 +51,9 @@ export const ControlBar = () => {
             }
           />
         )}
-      />
-      <Pressable
-        children={({ pressed }) => (
+      </Pressable>
+      <Pressable>
+        {({ pressed }) => (
           <Image
             style={tw`h-10 w-10`}
             source={
@@ -63,9 +63,9 @@ export const ControlBar = () => {
             }
           />
         )}
-      />
-      <Pressable
-        children={({ pressed }) => (
+      </Pressable>
+      <Pressable>
+        {({ pressed }) => (
           <Image
             style={tw`h-10 w-10`}
             source={
@@ -75,7 +75,7 @@ export const ControlBar = () => {
             }
           />
         )}
-      />
+      </Pressable>
     </View>
   );
 };
