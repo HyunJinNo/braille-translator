@@ -10,7 +10,7 @@ export const ControlBar = () => {
             style={tw`h-10 w-10`}
             source={
               pressed
-                ? require('@assets/icons/speak-icon.png')
+                ? require('@assets/icons/speak-icon-active.png')
                 : require('@assets/icons/speak-icon-clickable.png')
             }
           />
@@ -22,7 +22,7 @@ export const ControlBar = () => {
             style={tw`h-10 w-10`}
             source={
               pressed
-                ? require('@assets/icons/voice-icon.png')
+                ? require('@assets/icons/voice-icon-active.png')
                 : require('@assets/icons/voice-icon-clickable.png')
             }
           />
@@ -34,7 +34,7 @@ export const ControlBar = () => {
             style={tw`h-10 w-10`}
             source={
               pressed
-                ? require('@assets/icons/highlight-icon.png')
+                ? require('@assets/icons/highlight-icon-active.png')
                 : require('@assets/icons/highlight-icon-clickable.png')
             }
           />
@@ -46,7 +46,7 @@ export const ControlBar = () => {
             style={tw`h-10 w-10`}
             source={
               pressed
-                ? require('@assets/icons/edit-icon.png')
+                ? require('@assets/icons/edit-icon-active.png')
                 : require('@assets/icons/edit-icon-clickable.png')
             }
           />
@@ -58,7 +58,7 @@ export const ControlBar = () => {
             style={tw`h-10 w-10`}
             source={
               pressed
-                ? require('@assets/icons/play-icon.png')
+                ? require('@assets/icons/play-icon-active.png')
                 : require('@assets/icons/play-icon-clickable.png')
             }
           />
@@ -70,8 +70,8 @@ export const ControlBar = () => {
             style={tw`h-10 w-10`}
             source={
               pressed
-                ? require('@assets/icons/pause-icon.png')
-                : require('@assets/icons/pause-icon-clickable.png')
+                ? require('@assets/icons/stop-icon-active.png')
+                : require('@assets/icons/stop-icon-clickable.png')
             }
           />
         )}
