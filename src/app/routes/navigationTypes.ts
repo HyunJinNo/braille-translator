@@ -8,8 +8,8 @@ export type RootStackParamList = {
   HangulToBrailleHistory: undefined;
   BrailleToHangulHistory: undefined;
   Setting: undefined;
+  CameraTranslation: { headerTitle: string };
   PictureTranslation: { headerTitle: string };
-  RealTimeTranslation: { headerTitle: string };
 };
 
 declare global {

@@ -3,8 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootStackParamList } from './navigationTypes';
 import { BottomTabs } from './BottomTabs';
 import {
+  CameraTranslationScreen,
   PictureTranslationScreen,
-  RealTimeTranslationScreen,
 } from '@src/pages/translation';
 import { tw } from '@src/shared/lib/utils';
 
@@ -20,6 +20,11 @@ export const Navigation = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
+          name="CameraTranslation"
+          component={CameraTranslationScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
           name="PictureTranslation"
           component={PictureTranslationScreen}
           options={({ route }) => ({
@@ -27,11 +32,6 @@ export const Navigation = () => {
             headerTitleStyle: tw`text-lg`,
             headerTransparent: true,
           })}
-        />
-        <Stack.Screen
-          name="RealTimeTranslation"
-          component={RealTimeTranslationScreen}
-          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

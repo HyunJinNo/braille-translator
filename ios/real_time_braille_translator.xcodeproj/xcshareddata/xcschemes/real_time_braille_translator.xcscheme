@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "real_time_braille_translator.app"
-               BlueprintName = "real_time_braille_translator"
-               ReferencedContainer = "container:real_time_braille_translator.xcodeproj">
+               BuildableName = "braille_translator.app"
+               BlueprintName = "braille_translator"
+               ReferencedContainer = "container:braille_translator.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "real_time_braille_translatorTests.xctest"
-               BlueprintName = "real_time_braille_translatorTests"
-               ReferencedContainer = "container:real_time_braille_translator.xcodeproj">
+               BuildableName = "braille_translatorTests.xctest"
+               BlueprintName = "braille_translatorTests"
+               ReferencedContainer = "container:braille_translator.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "real_time_braille_translator.app"
-            BlueprintName = "real_time_braille_translator"
-            ReferencedContainer = "container:real_time_braille_translator.xcodeproj">
+            BuildableName = "braille_translator.app"
+            BlueprintName = "braille_translator"
+            ReferencedContainer = "container:braille_translator.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "real_time_braille_translator.app"
-            BlueprintName = "real_time_braille_translator"
-            ReferencedContainer = "container:real_time_braille_translator.xcodeproj">
+            BuildableName = "braille_translator.app"
+            BlueprintName = "braille_translator"
+            ReferencedContainer = "container:braille_translator.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

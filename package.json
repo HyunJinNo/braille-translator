@@ -1,5 +1,5 @@
 {
-  "name": "real_time_braille_translator",
+  "name": "braille_translator",
   "version": "0.0.1",
   "private": true,
   "scripts": {
