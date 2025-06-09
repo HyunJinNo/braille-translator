@@ -1,66 +1,32 @@
-import TextRecognition, {
-  TextRecognitionScript,
-} from '@react-native-ml-kit/text-recognition';
-import { useNavigation } from '@react-navigation/native';
-import { translate } from '@src/features/hangulToBraille';
 import { tw } from '@src/shared/lib/utils';
 import { LoadingOverlay } from '@src/shared/ui/overlay';
 import { ControlBar } from '@src/widgets/controlBar';
 import { TranslationTextViewer } from '@src/widgets/translationTextViewer';
-import { useEffect, useRef, useState } from 'react';
 import { Image, Text, View } from 'react-native';
-import {
-  Camera,
-  useCameraDevice,
-  useCameraPermission,
-} from 'react-native-vision-camera';
+import { Camera } from 'react-native-vision-camera';
+import { useCameraTranslationScreen } from '../model/useCameraTranslationScreen';
 
 export const CameraTranslationScreen = () => {
-  const navigation = useNavigation();
-  const device = useCameraDevice('back');
-  const camera = useRef<Camera>(null);
-  const { hasPermission, requestPermission } = useCameraPermission();
-  const [recognizedText, setRecognizedText] = useState('');
-  const [translatedText, setTranslatedText] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [imageURL, setImageURL] = useState('');
-
-  const takeSnapshot = async () => {
-    const snapshot = await camera.current?.takeSnapshot();
-
-    if (snapshot) {
-      setImageURL('file://' + snapshot.path);
-      setLoading(true);
-
-      const textRecognitionResult = await TextRecognition.recognize(
-        'file://' + snapshot.path,
-        TextRecognitionScript.KOREAN,
-      );
-      setRecognizedText(textRecognitionResult.text);
-      setTranslatedText(translate(textRecognitionResult.text));
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (!hasPermission) {
-      (async () => {
-        const cameraPermission = await requestPermission();
-
-        if (!cameraPermission) {
-          navigation.goBack();
-        }
-      })();
-    }
-  }, [hasPermission, navigation, requestPermission]);
+  const {
+    state,
+    device,
+    camera,
+    handleSpeakButtonPress,
+    handleVoiceButtonPress,
+    handleHighlightButtonPress,
+    handleEditButtonPress,
+    handlePlayButtonPress,
+    handleSnapshotButtonPress,
+    handleStopButtonPress,
+  } = useCameraTranslationScreen();
 
   return (
     <View style={tw`flex h-full flex-col justify-between bg-black`}>
-      <LoadingOverlay loading={loading} />
-      {imageURL !== '' ? (
+      <LoadingOverlay loading={state.loading} />
+      {state.imageURL !== '' ? (
         <Image
           style={tw`w-full flex-1 border border-blue-500`}
-          source={{ uri: imageURL }}
+          source={{ uri: state.imageURL }}
         />
       ) : !device ? (
         <View style={tw`w-full flex-1 bg-black`} />
@@ -69,7 +35,7 @@ export const CameraTranslationScreen = () => {
           <Camera
             style={tw`h-full w-full`}
             device={device}
-            isActive={false} // TODO
+            isActive={state.isCameraActive}
             photo={true}
             ref={camera}
           />
@@ -96,17 +62,24 @@ export const CameraTranslationScreen = () => {
       )}
       <View style={tw`bg-white px-4`}>
         <ControlBar
-          isSpeakButtonActive={false}
-          isVoiceButtonActive={false}
-          isHighlightButtonActive={false}
-          isEditButtonActive={false}
-          isPlayButtonActive={true}
-          isSnapshotButtonActive={false}
-          isStopButtonActive={false}
+          isSpeakButtonActive={state.isSpeakButtonActive}
+          isVoiceButtonActive={state.isVoiceButtonActive}
+          isHighlightButtonActive={state.isHighlightButtonActive}
+          isEditButtonActive={state.isEditButtonActive}
+          isPlayButtonActive={state.isPlayButtonActive}
+          isSnapshotButtonActive={state.isSnapshotButtonActive}
+          isStopButtonActive={state.isStopButtonActive}
+          onSpeakButtonPress={handleSpeakButtonPress}
+          onVoiceButtonPress={handleVoiceButtonPress}
+          onHighlightButtonPress={handleHighlightButtonPress}
+          onEditButtonPress={handleEditButtonPress}
+          onPlayButtonPress={handlePlayButtonPress}
+          onSnapshotButtonPress={handleSnapshotButtonPress}
+          onStopButtonPress={handleStopButtonPress}
         />
         <TranslationTextViewer
-          recognizedText={recognizedText}
-          translatedText={translatedText}
+          recognizedText={state.recognizedText}
+          translatedText={state.translatedText}
         />
       </View>
     </View>
