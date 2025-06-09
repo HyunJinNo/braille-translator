@@ -4,10 +4,11 @@ import TextRecognition, {
 import { useNavigation } from '@react-navigation/native';
 import { translate } from '@src/features/hangulToBraille';
 import { tw } from '@src/shared/lib/utils';
+import { LoadingOverlay } from '@src/shared/ui/overlay';
 import { ControlBar } from '@src/widgets/controlBar';
 import { TranslationTextViewer } from '@src/widgets/translationTextViewer';
 import { useEffect, useRef, useState } from 'react';
-import { Button, Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import {
   Camera,
   useCameraDevice,
@@ -21,17 +22,20 @@ export const CameraTranslationScreen = () => {
   const { hasPermission, requestPermission } = useCameraPermission();
   const [recognizedText, setRecognizedText] = useState('');
   const [translatedText, setTranslatedText] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const takeSnapshot = async () => {
     const snapshot = await camera.current?.takeSnapshot();
 
     if (snapshot) {
+      setLoading(true);
       const textRecognitionResult = await TextRecognition.recognize(
-        'file://' + snapshot?.path,
+        'file://' + snapshot.path,
         TextRecognitionScript.KOREAN,
       );
       setRecognizedText(textRecognitionResult.text);
       setTranslatedText(translate(textRecognitionResult.text));
+      setLoading(false);
     }
   };
 
@@ -49,6 +53,7 @@ export const CameraTranslationScreen = () => {
 
   return (
     <View style={tw`flex h-full flex-col justify-between bg-black`}>
+      <LoadingOverlay loading={loading} />
       {!device ? (
         <View style={tw`w-full flex-1 bg-black`} />
       ) : (
@@ -82,7 +87,10 @@ export const CameraTranslationScreen = () => {
         </View>
       )}
       <View style={tw`bg-white px-4`}>
-        <Button title="TEST" onPress={takeSnapshot} />
+        <Pressable style={tw`bg-green-400`} onPress={takeSnapshot}>
+          <Text>TEST</Text>
+        </Pressable>
+
         <ControlBar />
         <TranslationTextViewer
           recognizedText={recognizedText}
