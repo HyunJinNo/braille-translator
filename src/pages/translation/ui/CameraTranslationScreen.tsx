@@ -8,7 +8,7 @@ import { LoadingOverlay } from '@src/shared/ui/overlay';
 import { ControlBar } from '@src/widgets/controlBar';
 import { TranslationTextViewer } from '@src/widgets/translationTextViewer';
 import { useEffect, useRef, useState } from 'react';
-import { Image, Pressable, Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import {
   Camera,
   useCameraDevice,
@@ -23,15 +23,15 @@ export const CameraTranslationScreen = () => {
   const [recognizedText, setRecognizedText] = useState('');
   const [translatedText, setTranslatedText] = useState('');
   const [loading, setLoading] = useState(false);
-  const [temp, setTemp] = useState(''); // TODO
+  const [imageURL, setImageURL] = useState('');
 
   const takeSnapshot = async () => {
     const snapshot = await camera.current?.takeSnapshot();
 
     if (snapshot) {
-      setTemp('file://' + snapshot.path);
-
+      setImageURL('file://' + snapshot.path);
       setLoading(true);
+
       const textRecognitionResult = await TextRecognition.recognize(
         'file://' + snapshot.path,
         TextRecognitionScript.KOREAN,
@@ -57,11 +57,10 @@ export const CameraTranslationScreen = () => {
   return (
     <View style={tw`flex h-full flex-col justify-between bg-black`}>
       <LoadingOverlay loading={loading} />
-
-      {temp !== '' ? (
+      {imageURL !== '' ? (
         <Image
           style={tw`w-full flex-1 border border-blue-500`}
-          source={{ uri: temp }}
+          source={{ uri: imageURL }}
         />
       ) : !device ? (
         <View style={tw`w-full flex-1 bg-black`} />
@@ -70,7 +69,7 @@ export const CameraTranslationScreen = () => {
           <Camera
             style={tw`h-full w-full`}
             device={device}
-            isActive={true}
+            isActive={false} // TODO
             photo={true}
             ref={camera}
           />
@@ -96,11 +95,15 @@ export const CameraTranslationScreen = () => {
         </View>
       )}
       <View style={tw`bg-white px-4`}>
-        <Pressable style={tw`bg-green-400`} onPress={takeSnapshot}>
-          <Text>TEST</Text>
-        </Pressable>
-
-        <ControlBar />
+        <ControlBar
+          isSpeakButtonActive={false}
+          isVoiceButtonActive={false}
+          isHighlightButtonActive={false}
+          isEditButtonActive={false}
+          isPlayButtonActive={true}
+          isSnapshotButtonActive={false}
+          isStopButtonActive={false}
+        />
         <TranslationTextViewer
           recognizedText={recognizedText}
           translatedText={translatedText}

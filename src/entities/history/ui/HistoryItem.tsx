@@ -19,10 +19,10 @@ export const HistoryItem = ({
     <Pressable
       style={tw`flex w-full flex-row items-center justify-between gap-4 rounded-2xl border border-gray-200 bg-white p-4 shadow`}
       android_ripple={{ color: COLOR['green-200'] }}>
-      <View style={tw`flex flex-1 flex-row items-center gap-4`}>
+      <View style={tw`flex-1 flex-row items-center gap-4`}>
         <Image
           style={tw`h-18 w-18 rounded-xl`}
-          source={require('@assets/images/example.png')}
+          source={require('@assets/image/example.png')}
         />
         <View style={tw`flex-1 gap-1`}>
           <Text
@@ -41,8 +41,8 @@ export const HistoryItem = ({
         style={tw`h-10 w-10`}
         source={
           isBookmarked
-            ? require('@assets/icons/star-icon-filled-active.png')
-            : require('@assets/icons/star-icon-outline-inactive.png')
+            ? require('@assets/icon/star-icon-filled-active.png')
+            : require('@assets/icon/star-icon-outline-inactive.png')
         }
       />
     </Pressable>
