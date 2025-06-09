@@ -8,7 +8,7 @@ import { LoadingOverlay } from '@src/shared/ui/overlay';
 import { ControlBar } from '@src/widgets/controlBar';
 import { TranslationTextViewer } from '@src/widgets/translationTextViewer';
 import { useEffect, useRef, useState } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Image, Pressable, Text, View } from 'react-native';
 import {
   Camera,
   useCameraDevice,
@@ -23,11 +23,14 @@ export const CameraTranslationScreen = () => {
   const [recognizedText, setRecognizedText] = useState('');
   const [translatedText, setTranslatedText] = useState('');
   const [loading, setLoading] = useState(false);
+  const [temp, setTemp] = useState(''); // TODO
 
   const takeSnapshot = async () => {
     const snapshot = await camera.current?.takeSnapshot();
 
     if (snapshot) {
+      setTemp('file://' + snapshot.path);
+
       setLoading(true);
       const textRecognitionResult = await TextRecognition.recognize(
         'file://' + snapshot.path,
@@ -54,7 +57,13 @@ export const CameraTranslationScreen = () => {
   return (
     <View style={tw`flex h-full flex-col justify-between bg-black`}>
       <LoadingOverlay loading={loading} />
-      {!device ? (
+
+      {temp !== '' ? (
+        <Image
+          style={tw`w-full flex-1 border border-blue-500`}
+          source={{ uri: temp }}
+        />
+      ) : !device ? (
         <View style={tw`w-full flex-1 bg-black`} />
       ) : (
         <View style={tw`relative flex-1`}>
