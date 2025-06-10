@@ -16,8 +16,6 @@ type State = {
   loading: boolean;
   recognizedText: string;
   translatedText: string;
-  isSpeakButtonActive: boolean;
-  isVoiceButtonActive: boolean;
   isHighlightButtonActive: boolean;
   isEditButtonActive: boolean;
   isPlayButtonActive: boolean;
@@ -31,10 +29,7 @@ type Action =
   | { type: 'PLAY_BUTTON_PRESS' }
   | {
       type: 'SNAPSHOT_BUTTON_PRESS';
-      payload: {
-        isSpeakButtonActive: boolean;
-        isHighlightButtonActive: boolean;
-      };
+      payload: { isHighlightButtonActive: boolean };
     }
   | { type: 'STOP_BUTTON_PRESS' }
   | { type: 'START_ANALYZING'; payload: { imageURL: string } }
@@ -48,8 +43,6 @@ const reducer = (state: State, action: Action): State => {
     case 'HIGHLIGHT_BUTTON_PRESS':
       return {
         ...state,
-        isSpeakButtonActive: false,
-        isVoiceButtonActive: false,
         isHighlightButtonActive: true,
         isEditButtonActive: false,
         isPlayButtonActive: false,
@@ -59,8 +52,6 @@ const reducer = (state: State, action: Action): State => {
     case 'EDIT_BUTTON_PRESS':
       return {
         ...state,
-        isSpeakButtonActive: false,
-        isVoiceButtonActive: false,
         isHighlightButtonActive: false,
         isEditButtonActive: true,
         isPlayButtonActive: false,
@@ -74,8 +65,6 @@ const reducer = (state: State, action: Action): State => {
         recognizedText: '',
         translatedText: '',
         isCameraActive: true,
-        isSpeakButtonActive: false,
-        isVoiceButtonActive: false,
         isHighlightButtonActive: false,
         isEditButtonActive: false,
         isPlayButtonActive: false,
@@ -86,8 +75,6 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         isCameraActive: false,
-        isSpeakButtonActive: action.payload.isSpeakButtonActive,
-        isVoiceButtonActive: true,
         isHighlightButtonActive: action.payload.isHighlightButtonActive,
         isEditButtonActive: true,
         isPlayButtonActive: true,
@@ -98,7 +85,6 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         isCameraActive: false,
-        isVoiceButtonActive: true,
         isEditButtonActive: true,
         isPlayButtonActive: true,
         isSnapshotButtonActive: false,
@@ -133,8 +119,6 @@ export const useCameraTranslationScreen = () => {
     loading: false,
     recognizedText: '',
     translatedText: '',
-    isSpeakButtonActive: false,
-    isVoiceButtonActive: true,
     isHighlightButtonActive: false,
     isEditButtonActive: true,
     isPlayButtonActive: true,
@@ -142,19 +126,13 @@ export const useCameraTranslationScreen = () => {
     isStopButtonActive: false,
   });
 
-  const handleSpeakButtonPress = () => {
-    // TODO
-  };
-
-  const handleVoiceButtonPress = () => {
-    // TODO
-  };
-
   const handleHighlightButtonPress = () => {
+    // TODO
     dispatch({ type: 'HIGHLIGHT_BUTTON_PRESS' });
   };
 
   const handleEditButtonPress = () => {
+    // TODO
     dispatch({ type: 'EDIT_BUTTON_PRESS' });
   };
 
@@ -168,7 +146,7 @@ export const useCameraTranslationScreen = () => {
     if (!snapshot) {
       return dispatch({
         type: 'SNAPSHOT_BUTTON_PRESS',
-        payload: { isSpeakButtonActive: false, isHighlightButtonActive: false },
+        payload: { isHighlightButtonActive: false },
       });
     }
 
@@ -192,10 +170,7 @@ export const useCameraTranslationScreen = () => {
 
     dispatch({
       type: 'SNAPSHOT_BUTTON_PRESS',
-      payload: {
-        isSpeakButtonActive: textRecognitionResult.text !== '',
-        isHighlightButtonActive: textRecognitionResult.text !== '',
-      },
+      payload: { isHighlightButtonActive: textRecognitionResult.text !== '' },
     });
   };
 
@@ -219,8 +194,6 @@ export const useCameraTranslationScreen = () => {
     state,
     device,
     camera,
-    handleSpeakButtonPress,
-    handleVoiceButtonPress,
     handleHighlightButtonPress,
     handleEditButtonPress,
     handlePlayButtonPress,

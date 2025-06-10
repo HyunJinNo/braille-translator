@@ -12,8 +12,6 @@ export const CameraTranslationScreen = () => {
     state,
     device,
     camera,
-    handleSpeakButtonPress,
-    handleVoiceButtonPress,
     handleHighlightButtonPress,
     handleEditButtonPress,
     handlePlayButtonPress,
@@ -37,15 +35,11 @@ export const CameraTranslationScreen = () => {
       )}
       <View style={tw`bg-white px-4`}>
         <ControlBar
-          isSpeakButtonActive={state.isSpeakButtonActive}
-          isVoiceButtonActive={state.isVoiceButtonActive}
           isHighlightButtonActive={state.isHighlightButtonActive}
           isEditButtonActive={state.isEditButtonActive}
           isPlayButtonActive={state.isPlayButtonActive}
           isSnapshotButtonActive={state.isSnapshotButtonActive}
           isStopButtonActive={state.isStopButtonActive}
-          onSpeakButtonPress={handleSpeakButtonPress}
-          onVoiceButtonPress={handleVoiceButtonPress}
           onHighlightButtonPress={handleHighlightButtonPress}
           onEditButtonPress={handleEditButtonPress}
           onPlayButtonPress={handlePlayButtonPress}

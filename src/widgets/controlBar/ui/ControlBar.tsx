@@ -3,15 +3,11 @@ import { View } from 'react-native';
 import { ControlBarButton } from './ControlBarButton';
 
 interface ControlBarProps {
-  isSpeakButtonActive: boolean;
-  isVoiceButtonActive: boolean;
   isHighlightButtonActive: boolean;
   isEditButtonActive: boolean;
   isPlayButtonActive: boolean;
   isSnapshotButtonActive: boolean;
   isStopButtonActive: boolean;
-  onSpeakButtonPress: () => void;
-  onVoiceButtonPress: () => void;
   onHighlightButtonPress: () => void;
   onEditButtonPress: () => void;
   onPlayButtonPress: () => void;
@@ -20,15 +16,11 @@ interface ControlBarProps {
 }
 
 export const ControlBar = ({
-  isSpeakButtonActive,
-  isVoiceButtonActive,
   isHighlightButtonActive,
   isEditButtonActive,
   isPlayButtonActive,
   isSnapshotButtonActive,
   isStopButtonActive,
-  onSpeakButtonPress,
-  onVoiceButtonPress,
   onHighlightButtonPress,
   onEditButtonPress,
   onPlayButtonPress,
@@ -37,20 +29,6 @@ export const ControlBar = ({
 }: ControlBarProps) => {
   return (
     <View style={tw`h-15 flex flex-row items-center gap-3 bg-white`}>
-      <ControlBarButton
-        imageSource={require('@assets/icon/speak-icon-clickable.png')}
-        pressedImageSource={require('@assets/icon/speak-icon-active.png')}
-        disabledImageSource={require('@assets/icon/speak-icon-disabled.png')}
-        isActive={isSpeakButtonActive}
-        onPress={onSpeakButtonPress}
-      />
-      <ControlBarButton
-        imageSource={require('@assets/icon/voice-icon-clickable.png')}
-        pressedImageSource={require('@assets/icon/voice-icon-active.png')}
-        disabledImageSource={require('@assets/icon/voice-icon-disabled.png')}
-        isActive={isVoiceButtonActive}
-        onPress={onVoiceButtonPress}
-      />
       <ControlBarButton
         imageSource={require('@assets/icon/highlight-icon-clickable.png')}
         pressedImageSource={require('@assets/icon/highlight-icon-active.png')}
