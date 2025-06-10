@@ -1,15 +1,21 @@
 import { tw } from '@src/shared/lib/utils';
 import { Filter } from '@src/shared/ui/filter';
-import { View } from 'react-native';
+import { LayoutChangeEvent, View } from 'react-native';
 import { Camera, CameraDevice } from 'react-native-vision-camera';
 
 interface CameraViewProps {
   device?: CameraDevice;
   isActive: boolean;
   camera: React.RefObject<Camera | null>;
+  onLayout?: (event: LayoutChangeEvent) => void;
 }
 
-export const CameraView = ({ device, isActive, camera }: CameraViewProps) => {
+export const CameraView = ({
+  device,
+  isActive,
+  camera,
+  onLayout,
+}: CameraViewProps) => {
   if (!device) {
     return <View style={tw`w-full flex-1 bg-black`} />;
   }
@@ -27,6 +33,7 @@ export const CameraView = ({ device, isActive, camera }: CameraViewProps) => {
         isActive={isActive}
         photo={true}
         ref={camera}
+        onLayout={onLayout}
       />
     </Filter>
   );

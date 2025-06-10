@@ -12,6 +12,7 @@ export const CameraTranslationScreen = () => {
     state,
     device,
     camera,
+    handleLayout,
     handleHighlightButtonPress,
     handleEditButtonPress,
     handlePlayButtonPress,
@@ -31,6 +32,7 @@ export const CameraTranslationScreen = () => {
           device={device}
           isActive={state.isCameraActive}
           camera={camera}
+          onLayout={handleLayout}
         />
       )}
       <View style={tw`bg-white px-4`}>

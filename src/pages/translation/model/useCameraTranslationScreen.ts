@@ -1,9 +1,11 @@
+import ImageEditor from '@react-native-community/image-editor';
 import TextRecognition, {
   TextRecognitionScript,
 } from '@react-native-ml-kit/text-recognition';
 import { useNavigation } from '@react-navigation/native';
 import { translate } from '@src/features/hangulToBraille';
-import { useEffect, useReducer, useRef } from 'react';
+import { useEffect, useReducer, useRef, useState } from 'react';
+import { LayoutChangeEvent } from 'react-native';
 import {
   Camera,
   useCameraDevice,
@@ -31,7 +33,7 @@ type Action =
       type: 'SNAPSHOT_BUTTON_PRESS';
       payload: { isHighlightButtonActive: boolean };
     }
-  | { type: 'STOP_BUTTON_PRESS' }
+  | { type: 'STOP_BUTTON_PRESS'; payload: { isHighlightButtonActive: boolean } }
   | { type: 'START_ANALYZING'; payload: { imageURL: string } }
   | {
       type: 'FINISH_ANALYZING';
@@ -85,6 +87,7 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         isCameraActive: false,
+        isHighlightButtonActive: action.payload.isHighlightButtonActive,
         isEditButtonActive: true,
         isPlayButtonActive: true,
         isSnapshotButtonActive: false,
@@ -126,6 +129,15 @@ export const useCameraTranslationScreen = () => {
     isStopButtonActive: false,
   });
 
+  const [cameraViewWidth, setCameraViewWidth] = useState(0);
+  const [cameraViewHeight, setCameraViewHeight] = useState(0);
+
+  const handleLayout = (event: LayoutChangeEvent) => {
+    const { width, height } = event.nativeEvent.layout;
+    setCameraViewWidth(width);
+    setCameraViewHeight(height);
+  };
+
   const handleHighlightButtonPress = () => {
     // TODO
     dispatch({ type: 'HIGHLIGHT_BUTTON_PRESS' });
@@ -155,8 +167,22 @@ export const useCameraTranslationScreen = () => {
       payload: { imageURL: 'file://' + snapshot.path },
     });
 
-    const textRecognitionResult = await TextRecognition.recognize(
+    const croppedImage = await ImageEditor.cropImage(
       'file://' + snapshot.path,
+      {
+        offset: {
+          x: (16 * snapshot.width) / cameraViewWidth,
+          y: ((cameraViewHeight / 2 - 48) * snapshot.height) / cameraViewHeight,
+        },
+        size: {
+          width: ((cameraViewWidth - 32) * snapshot.width) / cameraViewWidth,
+          height: (96 * snapshot.height) / cameraViewHeight,
+        },
+      },
+    );
+
+    const textRecognitionResult = await TextRecognition.recognize(
+      croppedImage.uri,
       TextRecognitionScript.KOREAN,
     );
 
@@ -175,7 +201,10 @@ export const useCameraTranslationScreen = () => {
   };
 
   const handleStopButtonPress = () => {
-    dispatch({ type: 'STOP_BUTTON_PRESS' });
+    dispatch({
+      type: 'STOP_BUTTON_PRESS',
+      payload: { isHighlightButtonActive: state.recognizedText !== '' },
+    });
   };
 
   useEffect(() => {
@@ -194,6 +223,7 @@ export const useCameraTranslationScreen = () => {
     state,
     device,
     camera,
+    handleLayout,
     handleHighlightButtonPress,
     handleEditButtonPress,
     handlePlayButtonPress,
