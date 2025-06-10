@@ -5,6 +5,7 @@ import { TranslationTextViewer } from '@src/widgets/translationTextViewer';
 import { Image, View } from 'react-native';
 import { useCameraTranslationScreen } from '../model/useCameraTranslationScreen';
 import { CameraView } from '@src/widgets/cameraView';
+import { Filter } from '@src/shared/ui/filter';
 
 export const CameraTranslationScreen = () => {
   const {
@@ -24,10 +25,9 @@ export const CameraTranslationScreen = () => {
     <View style={tw`flex h-full flex-col justify-between bg-black`}>
       <LoadingOverlay loading={state.loading} />
       {state.imageURL !== '' ? (
-        <Image
-          style={tw`w-full flex-1 border border-blue-500`}
-          source={{ uri: state.imageURL }}
-        />
+        <Filter>
+          <Image style={tw`h-full w-full`} source={{ uri: state.imageURL }} />
+        </Filter>
       ) : (
         <CameraView
           device={device}

@@ -98,6 +98,8 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         isCameraActive: false,
+        isVoiceButtonActive: true,
+        isEditButtonActive: true,
         isPlayButtonActive: true,
         isSnapshotButtonActive: false,
         isStopButtonActive: false,
