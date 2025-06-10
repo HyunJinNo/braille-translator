@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:gravity="center"
-        android:text="Real-Time Braille Translator"
+        android:text="Braille Translator"
         android:textColor="@color/design_default_color_on_secondary"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
-        android:text="실시간 점자 번역기"
+        android:text="점자 번역기"
         android:textColor="@color/design_default_color_on_secondary"
         android:textSize="16sp"
         android:textStyle="bold" />

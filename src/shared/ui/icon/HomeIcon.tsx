@@ -11,8 +11,8 @@ export const HomeIcon = ({ focused }: HomeIconProps) => {
       style={tw`h-6 w-6`}
       source={
         focused
-          ? require('@assets/icons/home-active.png')
-          : require('@assets/icons/home.png')
+          ? require('@assets/icon/home-icon-active.png')
+          : require('@assets/icon/home-icon-inactive.png')
       }
     />
   );

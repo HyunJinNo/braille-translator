@@ -11,8 +11,8 @@ export const SettingIcon = ({ focused }: SettingIconProps) => {
       style={tw`h-6 w-6`}
       source={
         focused
-          ? require('@assets/icons/setting-active.png')
-          : require('@assets/icons/setting.png')
+          ? require('@assets/icon/setting-icon-active.png')
+          : require('@assets/icon/setting-icon-inactive.png')
       }
     />
   );

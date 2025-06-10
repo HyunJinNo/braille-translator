@@ -25,8 +25,8 @@ export const BookmarkButton = ({ isActive, onPress }: BookmarkButtonProps) => {
             style={tw`h-4 w-4`}
             source={
               isActive || pressed
-                ? require('@assets/icons/star-icon-filled-active.png')
-                : require('@assets/icons/star-icon-filled-inactive.png')
+                ? require('@assets/icon/star-icon-filled-active.png')
+                : require('@assets/icon/star-icon-filled-inactive.png')
             }
           />
           <Text

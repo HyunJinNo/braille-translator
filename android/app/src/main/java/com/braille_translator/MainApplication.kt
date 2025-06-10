@@ -1,4 +1,4 @@
-package com.real_time_braille_translator
+package com.braille_translator
 
 import android.app.Application
 import com.facebook.react.PackageList

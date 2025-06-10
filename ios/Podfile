@@ -14,7 +14,7 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-target 'real_time_braille_translator' do
+target 'braille_translator' do
   config = use_native_modules!
 
   use_react_native!(

@@ -473,5 +473,5 @@ export function translate(text: string) {
     translatedText += '\n';
   });
 
-  return translatedText;
+  return translatedText.trim();
 }

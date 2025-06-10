@@ -11,8 +11,8 @@ export const HangulToBrailleIcon = ({ focused }: HangulToBrailleIconProps) => {
       style={tw`h-6 w-6`}
       source={
         focused
-          ? require('@assets/icons/hangul-to-braille-icon-active.png')
-          : require('@assets/icons/hangul-to-braille-icon-inactive.png')
+          ? require('@assets/icon/hangul-to-braille-icon-active.png')
+          : require('@assets/icon/hangul-to-braille-icon-inactive.png')
       }
     />
   );

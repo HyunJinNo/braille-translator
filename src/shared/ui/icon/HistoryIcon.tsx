@@ -11,8 +11,8 @@ export const HistoryIcon = ({ focused }: HistoryIconProps) => {
       style={tw`h-6 w-6`}
       source={
         focused
-          ? require('@assets/icons/history-active.png')
-          : require('@assets/icons/history.png')
+          ? require('@assets/icon/history-icon-active.png')
+          : require('@assets/icon/history-icon-inactive.png')
       }
     />
   );
