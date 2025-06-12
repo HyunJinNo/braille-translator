@@ -3,11 +3,11 @@ import { LoadingOverlay } from '@src/shared/ui/overlay';
 import { ControlBar } from '@src/widgets/controlBar';
 import { TranslationTextViewer } from '@src/widgets/translationTextViewer';
 import { Image, View } from 'react-native';
-import { useCameraTranslationScreen } from '../model/useCameraTranslationScreen';
 import { CameraView } from '@src/widgets/cameraView';
 import { Filter } from '@src/shared/ui/filter';
+import { useBrailleCameraTranslationScreen } from '../model/useBrailleCameraTranslationScreen';
 
-export const CameraTranslationScreen = () => {
+export const BrailleCameraTranslationScreen = () => {
   const {
     state,
     device,
@@ -18,7 +18,7 @@ export const CameraTranslationScreen = () => {
     handlePlayButtonPress,
     handleSnapshotButtonPress,
     handleStopButtonPress,
-  } = useCameraTranslationScreen();
+  } = useBrailleCameraTranslationScreen();
 
   return (
     <View style={tw`flex h-full flex-col justify-between bg-black`}>

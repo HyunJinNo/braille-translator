@@ -8,8 +8,9 @@ interface ItemData {
   rippleColor: string;
   textColor: string;
   screen:
-    | 'CameraTranslation'
+    | 'BrailleCameraTranslation'
     | 'BrailleImageTranslation'
+    | 'HangulCameraTranslation'
     | 'HangulImageTranslation';
   headerTitle: string;
 }
@@ -22,7 +23,7 @@ export const HOME_BUTTON_DATA: ItemData[] = [
     buttonStyle: 'border-fuchsia-200 bg-fuchsia-50',
     rippleColor: COLOR['fuchsia-200'],
     textColor: 'text-fuchsia-400',
-    screen: 'CameraTranslation',
+    screen: 'HangulCameraTranslation',
     headerTitle: '한글 번역',
   },
   {
@@ -32,7 +33,7 @@ export const HOME_BUTTON_DATA: ItemData[] = [
     buttonStyle: 'border-green-200 bg-green-50',
     rippleColor: COLOR['green-200'],
     textColor: 'text-green-400',
-    screen: 'CameraTranslation',
+    screen: 'BrailleCameraTranslation',
     headerTitle: '점자 번역',
   },
   {

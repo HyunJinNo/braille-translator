@@ -2,10 +2,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootStackParamList } from './navigationTypes';
 import { BottomTabs } from './BottomTabs';
-import { CameraTranslationScreen } from '@src/pages/translation';
 import { tw } from '@src/shared/lib/utils';
 import { HangulImageTranslationScreen } from '@src/pages/hangulImageTranslation';
 import { BrailleImageTranslationScreen } from '@src/pages/brailleImageTranslation';
+import { HangulCameraTranslationScreen } from '@src/pages/hangulCameraTranslation';
+import { BrailleCameraTranslationScreen } from '@src/pages/brailleCameraTranslation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -19,8 +20,8 @@ export const Navigation = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="CameraTranslation"
-          component={CameraTranslationScreen}
+          name="BrailleCameraTranslation"
+          component={BrailleCameraTranslationScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -31,6 +32,11 @@ export const Navigation = () => {
             headerTitleStyle: tw`text-lg`,
             headerTransparent: true,
           }}
+        />
+        <Stack.Screen
+          name="HangulCameraTranslation"
+          component={HangulCameraTranslationScreen}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="HangulImageTranslation"
