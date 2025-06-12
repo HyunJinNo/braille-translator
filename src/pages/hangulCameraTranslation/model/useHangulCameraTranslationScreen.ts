@@ -111,7 +111,7 @@ const reducer = (state: State, action: Action): State => {
   }
 };
 
-export const useCameraTranslationScreen = () => {
+export const useHangulCameraTranslationScreen = () => {
   const navigation = useNavigation();
   const device = useCameraDevice('back');
   const camera = useRef<Camera>(null);

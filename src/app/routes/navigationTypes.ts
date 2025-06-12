@@ -8,7 +8,8 @@ export type RootStackParamList = {
   HangulToBrailleHistory: undefined;
   BrailleToHangulHistory: undefined;
   Setting: undefined;
-  CameraTranslation: undefined;
+  BrailleCameraTranslation: undefined;
+  HangulCameraTranslation: undefined;
   BrailleImageTranslation: undefined;
   HangulImageTranslation: undefined;
 };
