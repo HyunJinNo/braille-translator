@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { View } from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
 
-export const PictureTranslationScreen = () => {
+export const HangulImageTranslationScreen = () => {
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState<string>();
   const [recognizedText, setRecognizedText] = useState('');

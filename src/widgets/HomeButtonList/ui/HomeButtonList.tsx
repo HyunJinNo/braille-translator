@@ -20,9 +20,7 @@ export const HomeButtonList = () => {
           buttonStyle={item.buttonStyle}
           rippleColor={item.rippleColor}
           textColor={item.textColor}
-          onPress={() =>
-            navigation.navigate(item.screen, { headerTitle: item.headerTitle })
-          }
+          onPress={() => navigation.navigate(item.screen)}
         />
       )}
       keyExtractor={(item) => item.description.join(' ')}

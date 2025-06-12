@@ -7,7 +7,10 @@ interface ItemData {
   buttonStyle: string;
   rippleColor: string;
   textColor: string;
-  screen: 'CameraTranslation' | 'PictureTranslation';
+  screen:
+    | 'CameraTranslation'
+    | 'BrailleImageTranslation'
+    | 'HangulImageTranslation';
   headerTitle: string;
 }
 
@@ -39,7 +42,7 @@ export const HOME_BUTTON_DATA: ItemData[] = [
     buttonStyle: 'border-blue-200 bg-blue-50',
     rippleColor: COLOR['blue-200'],
     textColor: 'text-blue-400',
-    screen: 'PictureTranslation',
+    screen: 'HangulImageTranslation',
     headerTitle: '한글 이미지 번역',
   },
   {
@@ -49,7 +52,7 @@ export const HOME_BUTTON_DATA: ItemData[] = [
     buttonStyle: 'border-cyan-200 bg-cyan-50',
     rippleColor: COLOR['cyan-200'],
     textColor: 'text-cyan-400',
-    screen: 'PictureTranslation',
+    screen: 'BrailleImageTranslation',
     headerTitle: '점자 이미지 번역',
   },
 ] as const;
