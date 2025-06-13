@@ -1,20 +1,13 @@
 import { COLOR } from '@src/shared/config';
 import { tw } from '@src/shared/lib/utils';
 import { Image, Pressable, Text, View } from 'react-native';
+import { History } from '../model/history';
 
 interface HistoryItemProps {
-  recognizedText: string;
-  translatedText: string;
-  createdAt: string;
-  isBookmarked: boolean;
+  history: History;
 }
 
-export const HistoryItem = ({
-  recognizedText,
-  translatedText,
-  createdAt,
-  isBookmarked,
-}: HistoryItemProps) => {
+export const HistoryItem = ({ history }: HistoryItemProps) => {
   return (
     <Pressable
       style={tw`flex w-full flex-row items-center justify-between gap-4 rounded-2xl border border-gray-200 bg-white p-4 shadow`}
@@ -29,18 +22,18 @@ export const HistoryItem = ({
             style={tw`text-base font-semibold`}
             numberOfLines={1}
             ellipsizeMode="tail">
-            {recognizedText}
+            {history.recognizedText}
           </Text>
           <Text style={tw`text-base`} numberOfLines={1} ellipsizeMode="tail">
-            {translatedText}
+            {history.translatedText}
           </Text>
-          <Text style={tw`text-xs text-green-400`}>{createdAt}</Text>
+          <Text style={tw`text-xs text-green-400`}>{history.createdAt}</Text>
         </View>
       </View>
       <Image
         style={tw`h-10 w-10`}
         source={
-          isBookmarked
+          history.isBookmarked
             ? require('@assets/icon/star-icon-filled-active.png')
             : require('@assets/icon/star-icon-outline-inactive.png')
         }
