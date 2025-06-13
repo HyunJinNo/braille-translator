@@ -1,10 +1,11 @@
 import { History } from '@src/entities/history';
+import { HANGUL_TO_BRAILLE_HISTORY_KEY } from '@src/shared/config';
 import { storage } from '@src/shared/lib/utils';
 import { useEffect, useState } from 'react';
 
 export const useHangulToBrailleHistoryScreen = () => {
   const [onlyBookmarked, setOnlyBookmarked] = useState(false);
-  const [historyList, setHistoryList] = useState<History[]>();
+  const [historyList, setHistoryList] = useState<History[]>([]);
 
   const handleBookmarkButtonClick = () => {
     setOnlyBookmarked((value) => !value);
@@ -12,7 +13,7 @@ export const useHangulToBrailleHistoryScreen = () => {
 
   useEffect(() => {
     setHistoryList(
-      JSON.parse(storage.getString('hangulToBrailleHistory') ?? ''),
+      JSON.parse(storage.getString(HANGUL_TO_BRAILLE_HISTORY_KEY) ?? '[]'),
     );
   }, []);
 
