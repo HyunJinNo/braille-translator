@@ -1,4 +1,7 @@
-import { translate } from '@src/features/brailleToHangul';
+import {
+  saveBrailleToHangulHistory,
+  translate,
+} from '@src/features/brailleToHangul';
 import { useState } from 'react';
 import { launchImageLibrary } from 'react-native-image-picker';
 
@@ -24,6 +27,7 @@ export const useBrailleImageTranslationScreen = () => {
       setRecognizedText(data.srcText);
       setTranslatedText(data.translatedText);
       setLoading(false);
+      saveBrailleToHangulHistory(data.srcText, data.translatedText);
     }
   };
 
