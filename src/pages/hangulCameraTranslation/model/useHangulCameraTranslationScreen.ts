@@ -3,7 +3,10 @@ import TextRecognition, {
   TextRecognitionScript,
 } from '@react-native-ml-kit/text-recognition';
 import { useNavigation } from '@react-navigation/native';
-import { translate } from '@src/features/hangulToBraille';
+import {
+  saveHangulToBrailleHistory,
+  translate,
+} from '@src/features/hangulToBraille';
 import { useEffect, useReducer, useRef, useState } from 'react';
 import { LayoutChangeEvent } from 'react-native';
 import {
@@ -185,12 +188,13 @@ export const useHangulCameraTranslationScreen = () => {
       croppedImage.uri,
       TextRecognitionScript.KOREAN,
     );
+    const translatedResult = translate(textRecognitionResult.text);
 
     dispatch({
       type: 'FINISH_ANALYZING',
       payload: {
         recognizedText: textRecognitionResult.text,
-        translatedText: translate(textRecognitionResult.text),
+        translatedText: translatedResult,
       },
     });
 
@@ -198,6 +202,8 @@ export const useHangulCameraTranslationScreen = () => {
       type: 'SNAPSHOT_BUTTON_PRESS',
       payload: { isHighlightButtonActive: textRecognitionResult.text !== '' },
     });
+
+    saveHangulToBrailleHistory(textRecognitionResult.text, translatedResult);
   };
 
   const handleStopButtonPress = () => {
