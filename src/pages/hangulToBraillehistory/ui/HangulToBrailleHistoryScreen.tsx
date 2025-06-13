@@ -18,8 +18,11 @@ export const HangulToBrailleHistoryScreen = () => {
         />
       </View>
       <HistoryItemList
-        historyList={historyList ?? []}
-        onlyBookmarked={onlyBookmarked}
+        historyList={
+          onlyBookmarked
+            ? historyList.filter((history) => history.isBookmarked)
+            : historyList
+        }
       />
     </View>
   );
