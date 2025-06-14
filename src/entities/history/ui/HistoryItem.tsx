@@ -5,9 +5,10 @@ import { History } from '../model/history';
 
 interface HistoryItemProps {
   history: History;
+  onStarClick: () => void;
 }
 
-export const HistoryItem = ({ history }: HistoryItemProps) => {
+export const HistoryItem = ({ history, onStarClick }: HistoryItemProps) => {
   return (
     <Pressable
       style={tw`flex w-full flex-row items-center justify-between gap-4 rounded-2xl border border-gray-200 bg-white p-4 shadow`}
@@ -30,14 +31,16 @@ export const HistoryItem = ({ history }: HistoryItemProps) => {
           <Text style={tw`text-xs text-green-400`}>{history.createdAt}</Text>
         </View>
       </View>
-      <Image
-        style={tw`h-10 w-10`}
-        source={
-          history.isBookmarked
-            ? require('@assets/icon/star-icon-filled-active.png')
-            : require('@assets/icon/star-icon-outline-inactive.png')
-        }
-      />
+      <Pressable onPress={onStarClick}>
+        <Image
+          style={tw`h-10 w-10`}
+          source={
+            history.isBookmarked
+              ? require('@assets/icon/star-icon-filled-active.png')
+              : require('@assets/icon/star-icon-outline-inactive.png')
+          }
+        />
+      </Pressable>
     </Pressable>
   );
 };

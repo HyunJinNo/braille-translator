@@ -5,9 +5,13 @@ import { HistoryNotFound } from './HistoryNotFound';
 
 interface HistoryItemListProps {
   historyList: History[];
+  onStarClick: (createdAt: string) => void;
 }
 
-export const HistoryItemList = ({ historyList }: HistoryItemListProps) => {
+export const HistoryItemList = ({
+  historyList,
+  onStarClick,
+}: HistoryItemListProps) => {
   return (
     <FlatList
       contentContainerStyle={tw.style(
@@ -16,7 +20,12 @@ export const HistoryItemList = ({ historyList }: HistoryItemListProps) => {
           : 'gap-4 p-1',
       )}
       data={historyList}
-      renderItem={({ item }) => <HistoryItem history={item} />}
+      renderItem={({ item }) => (
+        <HistoryItem
+          history={item}
+          onStarClick={() => onStarClick(item.createdAt)}
+        />
+      )}
       keyExtractor={(item) => item.createdAt}
       ListEmptyComponent={<HistoryNotFound />}
     />

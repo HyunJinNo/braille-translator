@@ -5,8 +5,12 @@ import { Text, View } from 'react-native';
 import { useHangulToBrailleHistoryScreen } from '../model/useHangulToBrailleHistoryScreen';
 
 export const HangulToBrailleHistoryScreen = () => {
-  const { onlyBookmarked, historyList, handleBookmarkButtonClick } =
-    useHangulToBrailleHistoryScreen();
+  const {
+    onlyBookmarked,
+    historyList,
+    handleBookmarkButtonClick,
+    handleStarClick,
+  } = useHangulToBrailleHistoryScreen();
 
   return (
     <View style={tw`flex h-full flex-col gap-4 bg-white px-4 pb-4 pt-8`}>
@@ -23,6 +27,7 @@ export const HangulToBrailleHistoryScreen = () => {
             ? historyList.filter((history) => history.isBookmarked)
             : historyList
         }
+        onStarClick={handleStarClick}
       />
     </View>
   );

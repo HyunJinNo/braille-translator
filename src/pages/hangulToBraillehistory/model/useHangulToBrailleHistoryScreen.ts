@@ -12,6 +12,26 @@ export const useHangulToBrailleHistoryScreen = () => {
     setOnlyBookmarked((value) => !value);
   };
 
+  const handleStarClick = (createdAt: string) => {
+    const updatedHistoryList = [...historyList];
+    const index = updatedHistoryList.findIndex(
+      (history) => history.createdAt === createdAt,
+    );
+
+    if (index === -1) {
+      return;
+    }
+
+    updatedHistoryList[index].isBookmarked =
+      !updatedHistoryList[index].isBookmarked;
+
+    storage.set(
+      HANGUL_TO_BRAILLE_HISTORY_KEY,
+      JSON.stringify(updatedHistoryList),
+    );
+    setHistoryList(updatedHistoryList);
+  };
+
   useFocusEffect(
     useCallback(() => {
       setHistoryList(
@@ -20,5 +40,10 @@ export const useHangulToBrailleHistoryScreen = () => {
     }, []),
   );
 
-  return { onlyBookmarked, historyList, handleBookmarkButtonClick };
+  return {
+    onlyBookmarked,
+    historyList,
+    handleBookmarkButtonClick,
+    handleStarClick,
+  };
 };
