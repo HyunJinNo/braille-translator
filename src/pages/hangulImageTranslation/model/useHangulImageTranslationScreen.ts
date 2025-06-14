@@ -1,7 +1,10 @@
 import TextRecognition, {
   TextRecognitionScript,
 } from '@react-native-ml-kit/text-recognition';
-import { translate } from '@src/features/hangulToBraille';
+import {
+  saveHangulToBrailleHistory,
+  translate,
+} from '@src/features/hangulToBraille';
 import { useState } from 'react';
 import { launchImageLibrary } from 'react-native-image-picker';
 
@@ -22,9 +25,12 @@ export const useHangulImageTranslationScreen = () => {
         result.assets[0].uri,
         TextRecognitionScript.KOREAN,
       );
+      const translatedResult = translate(textRecognitionResult.text);
+
       setRecognizedText(textRecognitionResult.text);
-      setTranslatedText(translate(textRecognitionResult.text));
+      setTranslatedText(translatedResult);
       setLoading(false);
+      saveHangulToBrailleHistory(textRecognitionResult.text, translatedResult);
     }
   };
 

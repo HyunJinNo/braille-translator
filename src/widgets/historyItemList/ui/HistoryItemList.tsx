@@ -1,59 +1,33 @@
-import { HistoryItem } from '@src/entities/history';
+import { History, HistoryItem } from '@src/entities/history';
 import { tw } from '@src/shared/lib/utils';
 import { FlatList } from 'react-native';
-
-// TODO: 삭제 필요
-const temp = [
-  {
-    recognizedText: '남자장애인화장실',
-    translatedText: '⠉⠢⠨⠨⠶⠗⠟⠚⠧⠨⠶⠠⠕⠂',
-    createdAt: '2025-06-06 21:05',
-    isBookmarked: true,
-  },
-  {
-    recognizedText: '실시간 점자 번역기 앱의 디자인입니다.',
-    translatedText: '⠠⠕⠂⠠⠕⠫⠒⠀⠨⠎⠢⠨⠀⠘⠾⠱⠁⠈⠕⠀⠗⠃⠺⠀⠊⠕⠨⠣⠟⠕⠃⠉⠕⠊⠲',
-    createdAt: '2025-06-06 21:04',
-    isBookmarked: false,
-  },
-  {
-    recognizedText: '남자장애인화장실',
-    translatedText: '⠉⠢⠨⠨⠶⠗⠟⠚⠧⠨⠶⠠⠕⠂',
-    createdAt: '2025-06-06 21:03',
-    isBookmarked: true,
-  },
-  {
-    recognizedText: '실시간 점자 번역기 앱의 디자인입니다.',
-    translatedText: '⠠⠕⠂⠠⠕⠫⠒⠀⠨⠎⠢⠨⠀⠘⠾⠱⠁⠈⠕⠀⠗⠃⠺⠀⠊⠕⠨⠣⠟⠕⠃⠉⠕⠊⠲',
-    createdAt: '2025-06-06 21:02',
-    isBookmarked: false,
-  },
-  {
-    recognizedText: '실시간 점자 번역기 앱의 디자인입니다.',
-    translatedText: '⠠⠕⠂⠠⠕⠫⠒⠀⠨⠎⠢⠨⠀⠘⠾⠱⠁⠈⠕⠀⠗⠃⠺⠀⠊⠕⠨⠣⠟⠕⠃⠉⠕⠊⠲',
-    createdAt: '2025-06-06 21:01',
-    isBookmarked: false,
-  },
-];
+import { HistoryNotFound } from './HistoryNotFound';
 
 interface HistoryItemListProps {
-  onlyBookmarked: boolean;
+  historyList: History[];
+  onStarClick: (createdAt: string) => void;
 }
 
-export const HistoryItemList = ({ onlyBookmarked }: HistoryItemListProps) => {
+export const HistoryItemList = ({
+  historyList,
+  onStarClick,
+}: HistoryItemListProps) => {
   return (
     <FlatList
-      contentContainerStyle={tw`gap-4 p-1`}
-      data={onlyBookmarked ? temp.filter((item) => item.isBookmarked) : temp}
+      contentContainerStyle={tw.style(
+        historyList.length === 0
+          ? 'flex-1 items-center justify-center'
+          : 'gap-4 p-1',
+      )}
+      data={historyList}
       renderItem={({ item }) => (
         <HistoryItem
-          recognizedText={item.recognizedText}
-          translatedText={item.translatedText}
-          createdAt={item.createdAt}
-          isBookmarked={item.isBookmarked}
+          history={item}
+          onStarClick={() => onStarClick(item.createdAt)}
         />
       )}
       keyExtractor={(item) => item.createdAt}
+      ListEmptyComponent={<HistoryNotFound />}
     />
   );
 };

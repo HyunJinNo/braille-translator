@@ -1,15 +1,16 @@
 import { tw } from '@src/shared/lib/utils';
 import { BookmarkButton } from '@src/shared/ui/button';
 import { HistoryItemList } from '@src/widgets/historyItemList';
-import { useState } from 'react';
 import { Text, View } from 'react-native';
+import { useBrailleToHangulHistoryScreen } from '../model/useBrailleToHangulHistoryScreen';
 
-export const HangulToBrailleHistoryScreen = () => {
-  const [onlyBookmarked, setOnlyBookmarked] = useState(false);
-
-  const handleBookmarkButtonClick = () => {
-    setOnlyBookmarked((value) => !value);
-  };
+export const BrailleToHangulHistoryScreen = () => {
+  const {
+    onlyBookmarked,
+    historyList,
+    handleBookmarkButtonClick,
+    handleStarClick,
+  } = useBrailleToHangulHistoryScreen();
 
   return (
     <View style={tw`flex h-full flex-col gap-4 bg-white px-4 pb-4 pt-8`}>
@@ -20,7 +21,14 @@ export const HangulToBrailleHistoryScreen = () => {
           onPress={handleBookmarkButtonClick}
         />
       </View>
-      <HistoryItemList onlyBookmarked={onlyBookmarked} />
+      <HistoryItemList
+        historyList={
+          onlyBookmarked
+            ? historyList.filter((history) => history.isBookmarked)
+            : historyList
+        }
+        onStarClick={handleStarClick}
+      />
     </View>
   );
 };

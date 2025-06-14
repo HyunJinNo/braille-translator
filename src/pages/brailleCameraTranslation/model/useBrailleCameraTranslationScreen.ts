@@ -1,6 +1,9 @@
 import ImageEditor from '@react-native-community/image-editor';
 import { useNavigation } from '@react-navigation/native';
-import { translate } from '@src/features/brailleToHangul';
+import {
+  saveBrailleToHangulHistory,
+  translate,
+} from '@src/features/brailleToHangul';
 import { useEffect, useReducer, useRef, useState } from 'react';
 import { LayoutChangeEvent } from 'react-native';
 import {
@@ -196,6 +199,8 @@ export const useBrailleCameraTranslationScreen = () => {
       type: 'SNAPSHOT_BUTTON_PRESS',
       payload: { isHighlightButtonActive: data.srcText !== '' },
     });
+
+    saveBrailleToHangulHistory(data.srcText, data.translatedText);
   };
 
   const handleStopButtonPress = () => {
