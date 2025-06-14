@@ -13,23 +13,17 @@ export const HistoryItem = ({ history, onStarClick }: HistoryItemProps) => {
     <Pressable
       style={tw`flex w-full flex-row items-center justify-between gap-4 rounded-2xl border border-gray-200 bg-white p-4 shadow`}
       android_ripple={{ color: COLOR['green-200'] }}>
-      <View style={tw`flex-1 flex-row items-center gap-4`}>
-        <Image
-          style={tw`h-18 w-18 rounded-xl`}
-          source={require('@assets/image/example.png')}
-        />
-        <View style={tw`flex-1 gap-1`}>
-          <Text
-            style={tw`text-base font-semibold`}
-            numberOfLines={1}
-            ellipsizeMode="tail">
-            {history.recognizedText}
-          </Text>
-          <Text style={tw`text-base`} numberOfLines={1} ellipsizeMode="tail">
-            {history.translatedText}
-          </Text>
-          <Text style={tw`text-xs text-green-400`}>{history.createdAt}</Text>
-        </View>
+      <View style={tw`flex-1 gap-1`}>
+        <Text
+          style={tw`text-base font-semibold`}
+          numberOfLines={1}
+          ellipsizeMode="tail">
+          {history.recognizedText}
+        </Text>
+        <Text style={tw`text-base`} numberOfLines={1} ellipsizeMode="tail">
+          {history.translatedText}
+        </Text>
+        <Text style={tw`text-xs text-green-400`}>{history.createdAt}</Text>
       </View>
       <Pressable onPress={onStarClick}>
         <Image
