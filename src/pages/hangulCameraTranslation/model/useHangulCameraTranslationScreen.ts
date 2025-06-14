@@ -158,7 +158,6 @@ export const useHangulCameraTranslationScreen = () => {
   };
 
   const handleEditButtonPress = () => {
-    // TODO
     dispatch({ type: 'EDIT_BUTTON_PRESS' });
   };
 

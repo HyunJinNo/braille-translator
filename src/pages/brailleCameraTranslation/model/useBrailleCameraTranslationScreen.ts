@@ -19,7 +19,6 @@ type State = {
   recognizedText: string;
   translatedText: string;
   isHighlightButtonActive: boolean;
-  isEditButtonActive: boolean;
   isPlayButtonActive: boolean;
   isSnapshotButtonActive: boolean;
   isStopButtonActive: boolean;
@@ -27,7 +26,6 @@ type State = {
 
 type Action =
   | { type: 'HIGHLIGHT_BUTTON_PRESS' }
-  | { type: 'EDIT_BUTTON_PRESS' }
   | { type: 'PLAY_BUTTON_PRESS' }
   | {
       type: 'SNAPSHOT_BUTTON_PRESS';
@@ -46,16 +44,6 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         isHighlightButtonActive: true,
-        isEditButtonActive: false,
-        isPlayButtonActive: false,
-        isSnapshotButtonActive: false,
-        isStopButtonActive: true,
-      };
-    case 'EDIT_BUTTON_PRESS':
-      return {
-        ...state,
-        isHighlightButtonActive: false,
-        isEditButtonActive: true,
         isPlayButtonActive: false,
         isSnapshotButtonActive: false,
         isStopButtonActive: true,
@@ -68,7 +56,6 @@ const reducer = (state: State, action: Action): State => {
         translatedText: '',
         isCameraActive: true,
         isHighlightButtonActive: false,
-        isEditButtonActive: false,
         isPlayButtonActive: false,
         isSnapshotButtonActive: true,
         isStopButtonActive: true,
@@ -78,7 +65,6 @@ const reducer = (state: State, action: Action): State => {
         ...state,
         isCameraActive: false,
         isHighlightButtonActive: action.payload.isHighlightButtonActive,
-        isEditButtonActive: true,
         isPlayButtonActive: true,
         isSnapshotButtonActive: false,
         isStopButtonActive: false,
@@ -88,7 +74,6 @@ const reducer = (state: State, action: Action): State => {
         ...state,
         isCameraActive: false,
         isHighlightButtonActive: action.payload.isHighlightButtonActive,
-        isEditButtonActive: true,
         isPlayButtonActive: true,
         isSnapshotButtonActive: false,
         isStopButtonActive: false,
@@ -123,7 +108,6 @@ export const useBrailleCameraTranslationScreen = () => {
     recognizedText: '',
     translatedText: '',
     isHighlightButtonActive: false,
-    isEditButtonActive: true,
     isPlayButtonActive: true,
     isSnapshotButtonActive: false,
     isStopButtonActive: false,
@@ -141,11 +125,6 @@ export const useBrailleCameraTranslationScreen = () => {
   const handleHighlightButtonPress = () => {
     // TODO
     dispatch({ type: 'HIGHLIGHT_BUTTON_PRESS' });
-  };
-
-  const handleEditButtonPress = () => {
-    // TODO
-    dispatch({ type: 'EDIT_BUTTON_PRESS' });
   };
 
   const handlePlayButtonPress = () => {
@@ -228,7 +207,6 @@ export const useBrailleCameraTranslationScreen = () => {
     camera,
     handleLayout,
     handleHighlightButtonPress,
-    handleEditButtonPress,
     handlePlayButtonPress,
     handleSnapshotButtonPress,
     handleStopButtonPress,

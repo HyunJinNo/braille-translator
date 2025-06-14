@@ -14,7 +14,6 @@ export const BrailleCameraTranslationScreen = () => {
     camera,
     handleLayout,
     handleHighlightButtonPress,
-    handleEditButtonPress,
     handlePlayButtonPress,
     handleSnapshotButtonPress,
     handleStopButtonPress,
@@ -38,12 +37,10 @@ export const BrailleCameraTranslationScreen = () => {
       <View style={tw`bg-white px-4`}>
         <ControlBar
           isHighlightButtonActive={state.isHighlightButtonActive}
-          isEditButtonActive={state.isEditButtonActive}
           isPlayButtonActive={state.isPlayButtonActive}
           isSnapshotButtonActive={state.isSnapshotButtonActive}
           isStopButtonActive={state.isStopButtonActive}
           onHighlightButtonPress={handleHighlightButtonPress}
-          onEditButtonPress={handleEditButtonPress}
           onPlayButtonPress={handlePlayButtonPress}
           onSnapshotButtonPress={handleSnapshotButtonPress}
           onStopButtonPress={handleStopButtonPress}

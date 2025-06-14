@@ -5,8 +5,8 @@ import { ScrollView, Text, TextInput, View } from 'react-native';
 interface TranslationTextViewerProps {
   recognizedText: string;
   translatedText: string;
-  recognizedTextEditable: boolean;
-  onChangeRecognizedText: (text: string) => void;
+  recognizedTextEditable?: boolean;
+  onChangeRecognizedText?: (text: string) => void;
 }
 
 export const TranslationTextViewer = ({
@@ -28,7 +28,7 @@ export const TranslationTextViewer = ({
           onChangeText={onChangeRecognizedText}
           value={recognizedText}
           placeholder="인식된 글자"
-          editable={recognizedTextEditable}
+          editable={recognizedTextEditable ?? false}
         />
       </ScrollView>
       <ScrollView style={tw`h-40`}>
