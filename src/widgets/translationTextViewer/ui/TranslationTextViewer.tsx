@@ -20,8 +20,7 @@ export const TranslationTextViewer = ({
       <ScrollView style={tw`h-40 border-b border-t border-gray-400`}>
         <TextInput
           style={tw.style(
-            recognizedTextEditable &&
-              'text-blue-400 underline underline-offset-2',
+            recognizedTextEditable && 'text-blue-400 underline',
             'pt-2 text-xl',
           )}
           placeholderTextColor={COLOR['gray-400']}
