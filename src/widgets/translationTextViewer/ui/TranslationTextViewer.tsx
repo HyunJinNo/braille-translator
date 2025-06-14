@@ -1,25 +1,35 @@
+import { COLOR } from '@src/shared/config';
 import { tw } from '@src/shared/lib/utils';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, TextInput, View } from 'react-native';
 
 interface TranslationTextViewerProps {
   recognizedText: string;
   translatedText: string;
+  recognizedTextEditable: boolean;
+  onChangeRecognizedText: (text: string) => void;
 }
 
 export const TranslationTextViewer = ({
   recognizedText,
   translatedText,
+  recognizedTextEditable,
+  onChangeRecognizedText,
 }: TranslationTextViewerProps) => {
   return (
     <View style={tw`bg-white`}>
       <ScrollView style={tw`h-40 border-b border-t border-gray-400`}>
-        <Text
+        <TextInput
           style={tw.style(
-            recognizedText === '' && 'text-gray-400',
+            recognizedTextEditable &&
+              'text-blue-400 underline underline-offset-2',
             'pt-2 text-xl',
-          )}>
-          {recognizedText !== '' ? recognizedText : '인식된 글자'}
-        </Text>
+          )}
+          placeholderTextColor={COLOR['gray-400']}
+          onChangeText={onChangeRecognizedText}
+          value={recognizedText}
+          placeholder="인식된 글자"
+          editable={recognizedTextEditable}
+        />
       </ScrollView>
       <ScrollView style={tw`h-40`}>
         <Text
