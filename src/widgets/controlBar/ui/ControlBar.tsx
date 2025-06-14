@@ -4,12 +4,12 @@ import { ControlBarButton } from './ControlBarButton';
 
 interface ControlBarProps {
   isHighlightButtonActive: boolean;
-  isEditButtonActive: boolean;
+  isEditButtonActive?: boolean;
   isPlayButtonActive: boolean;
   isSnapshotButtonActive: boolean;
   isStopButtonActive: boolean;
   onHighlightButtonPress: () => void;
-  onEditButtonPress: () => void;
+  onEditButtonPress?: () => void;
   onPlayButtonPress: () => void;
   onSnapshotButtonPress: () => void;
   onStopButtonPress: () => void;
@@ -36,13 +36,15 @@ export const ControlBar = ({
         isActive={isHighlightButtonActive}
         onPress={onHighlightButtonPress}
       />
-      <ControlBarButton
-        imageSource={require('@assets/icon/edit-icon-clickable.png')}
-        pressedImageSource={require('@assets/icon/edit-icon-active.png')}
-        disabledImageSource={require('@assets/icon/edit-icon-disabled.png')}
-        isActive={isEditButtonActive}
-        onPress={onEditButtonPress}
-      />
+      {isEditButtonActive !== undefined && onEditButtonPress !== undefined && (
+        <ControlBarButton
+          imageSource={require('@assets/icon/edit-icon-clickable.png')}
+          pressedImageSource={require('@assets/icon/edit-icon-active.png')}
+          disabledImageSource={require('@assets/icon/edit-icon-disabled.png')}
+          isActive={isEditButtonActive}
+          onPress={onEditButtonPress}
+        />
+      )}
       <ControlBarButton
         imageSource={require('@assets/icon/play-icon-clickable.png')}
         pressedImageSource={require('@assets/icon/play-icon-active.png')}

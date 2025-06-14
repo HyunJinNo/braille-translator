@@ -21,6 +21,7 @@ type State = {
   loading: boolean;
   recognizedText: string;
   translatedText: string;
+  recognizedTextEditable: boolean;
   isHighlightButtonActive: boolean;
   isEditButtonActive: boolean;
   isPlayButtonActive: boolean;
@@ -41,7 +42,8 @@ type Action =
   | {
       type: 'FINISH_ANALYZING';
       payload: { recognizedText: string; translatedText: string };
-    };
+    }
+  | { type: 'CHANGE_RECOGNIZED_TEXT'; payload: { text: string } };
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -57,6 +59,7 @@ const reducer = (state: State, action: Action): State => {
     case 'EDIT_BUTTON_PRESS':
       return {
         ...state,
+        recognizedTextEditable: true,
         isHighlightButtonActive: false,
         isEditButtonActive: true,
         isPlayButtonActive: false,
@@ -90,6 +93,7 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         isCameraActive: false,
+        recognizedTextEditable: false,
         isHighlightButtonActive: action.payload.isHighlightButtonActive,
         isEditButtonActive: true,
         isPlayButtonActive: true,
@@ -109,6 +113,12 @@ const reducer = (state: State, action: Action): State => {
         recognizedText: action.payload.recognizedText,
         translatedText: action.payload.translatedText,
       };
+    case 'CHANGE_RECOGNIZED_TEXT':
+      return {
+        ...state,
+        recognizedText: action.payload.text,
+        translatedText: translate(action.payload.text),
+      };
     default:
       throw new Error('Unknown action type');
   }
@@ -125,6 +135,7 @@ export const useHangulCameraTranslationScreen = () => {
     loading: false,
     recognizedText: '',
     translatedText: '',
+    recognizedTextEditable: false,
     isHighlightButtonActive: false,
     isEditButtonActive: true,
     isPlayButtonActive: true,
@@ -147,7 +158,6 @@ export const useHangulCameraTranslationScreen = () => {
   };
 
   const handleEditButtonPress = () => {
-    // TODO
     dispatch({ type: 'EDIT_BUTTON_PRESS' });
   };
 
@@ -213,6 +223,10 @@ export const useHangulCameraTranslationScreen = () => {
     });
   };
 
+  const handleRecognizedTextChange = (text: string) => {
+    dispatch({ type: 'CHANGE_RECOGNIZED_TEXT', payload: { text } });
+  };
+
   useEffect(() => {
     if (!hasPermission) {
       (async () => {
@@ -235,5 +249,6 @@ export const useHangulCameraTranslationScreen = () => {
     handlePlayButtonPress,
     handleSnapshotButtonPress,
     handleStopButtonPress,
+    handleRecognizedTextChange,
   };
 };

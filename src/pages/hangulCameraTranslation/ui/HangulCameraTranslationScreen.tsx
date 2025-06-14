@@ -18,6 +18,7 @@ export const HangulCameraTranslationScreen = () => {
     handlePlayButtonPress,
     handleSnapshotButtonPress,
     handleStopButtonPress,
+    handleRecognizedTextChange,
   } = useHangulCameraTranslationScreen();
 
   return (
@@ -51,6 +52,8 @@ export const HangulCameraTranslationScreen = () => {
         <TranslationTextViewer
           recognizedText={state.recognizedText}
           translatedText={state.translatedText}
+          recognizedTextEditable={state.recognizedTextEditable}
+          onChangeRecognizedText={handleRecognizedTextChange}
         />
       </View>
     </View>

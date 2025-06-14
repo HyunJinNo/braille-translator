@@ -1,10 +1,10 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { RootStackParamList } from './navigationTypes';
-import { HangulToBrailleHistoryScreen } from '@src/pages/hangulToBrailleHistory';
 import { tw } from '@src/shared/lib/utils';
 import { COLOR } from '@src/shared/config';
 import { BrailleToHangulIcon, HangulToBrailleIcon } from '@src/shared/ui/icon';
 import { BrailleToHangulHistoryScreen } from '@src/pages/brailleToHangulHistory';
+import { HangulToBrailleHistoryScreen } from '@src/pages/hangulToBraillehistory';
 
 const Tab = createMaterialTopTabNavigator<RootStackParamList>();
 
