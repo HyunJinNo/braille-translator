@@ -48,8 +48,6 @@ export const ToastProvider = ({ children }: ToastProviderProps) => {
             { opacity },
           )}>
           {message}
-          {message}
-          {message}
         </Animated.Text>
       </View>
     </ToastDispatcherContext>
