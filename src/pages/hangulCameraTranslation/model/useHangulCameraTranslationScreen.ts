@@ -27,6 +27,7 @@ type State = {
   isPlayButtonActive: boolean;
   isSnapshotButtonActive: boolean;
   isStopButtonActive: boolean;
+  isSaveButtonActive: boolean;
 };
 
 type Action =
@@ -55,6 +56,7 @@ const reducer = (state: State, action: Action): State => {
         isPlayButtonActive: false,
         isSnapshotButtonActive: false,
         isStopButtonActive: true,
+        isSaveButtonActive: false,
       };
     case 'EDIT_BUTTON_PRESS':
       return {
@@ -65,6 +67,7 @@ const reducer = (state: State, action: Action): State => {
         isPlayButtonActive: false,
         isSnapshotButtonActive: false,
         isStopButtonActive: true,
+        isSaveButtonActive: false,
       };
     case 'PLAY_BUTTON_PRESS':
       return {
@@ -78,6 +81,7 @@ const reducer = (state: State, action: Action): State => {
         isPlayButtonActive: false,
         isSnapshotButtonActive: true,
         isStopButtonActive: true,
+        isSaveButtonActive: false,
       };
     case 'SNAPSHOT_BUTTON_PRESS':
       return {
@@ -88,6 +92,7 @@ const reducer = (state: State, action: Action): State => {
         isPlayButtonActive: true,
         isSnapshotButtonActive: false,
         isStopButtonActive: false,
+        isSaveButtonActive: action.payload.isHighlightButtonActive,
       };
     case 'STOP_BUTTON_PRESS':
       return {
@@ -99,6 +104,7 @@ const reducer = (state: State, action: Action): State => {
         isPlayButtonActive: true,
         isSnapshotButtonActive: false,
         isStopButtonActive: false,
+        isSaveButtonActive: action.payload.isHighlightButtonActive,
       };
     case 'START_ANALYZING':
       return {
@@ -141,6 +147,7 @@ export const useHangulCameraTranslationScreen = () => {
     isPlayButtonActive: true,
     isSnapshotButtonActive: false,
     isStopButtonActive: false,
+    isSaveButtonActive: false,
   });
 
   const [cameraViewWidth, setCameraViewWidth] = useState(0);
@@ -223,6 +230,10 @@ export const useHangulCameraTranslationScreen = () => {
     });
   };
 
+  const handleSaveButtonPress = () => {
+    // TODO
+  };
+
   const handleRecognizedTextChange = (text: string) => {
     dispatch({ type: 'CHANGE_RECOGNIZED_TEXT', payload: { text } });
   };
@@ -250,5 +261,6 @@ export const useHangulCameraTranslationScreen = () => {
     handleSnapshotButtonPress,
     handleStopButtonPress,
     handleRecognizedTextChange,
+    handleSaveButtonPress,
   };
 };

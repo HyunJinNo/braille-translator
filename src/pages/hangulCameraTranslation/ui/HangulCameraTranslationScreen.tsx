@@ -19,6 +19,7 @@ export const HangulCameraTranslationScreen = () => {
     handleSnapshotButtonPress,
     handleStopButtonPress,
     handleRecognizedTextChange,
+    handleSaveButtonPress,
   } = useHangulCameraTranslationScreen();
 
   return (
@@ -43,11 +44,13 @@ export const HangulCameraTranslationScreen = () => {
           isPlayButtonActive={state.isPlayButtonActive}
           isSnapshotButtonActive={state.isSnapshotButtonActive}
           isStopButtonActive={state.isStopButtonActive}
+          isSaveButtonActive={state.isSaveButtonActive}
           onHighlightButtonPress={handleHighlightButtonPress}
           onEditButtonPress={handleEditButtonPress}
           onPlayButtonPress={handlePlayButtonPress}
           onSnapshotButtonPress={handleSnapshotButtonPress}
           onStopButtonPress={handleStopButtonPress}
+          onSaveButtonPress={handleSaveButtonPress}
         />
         <TranslationTextViewer
           recognizedText={state.recognizedText}
