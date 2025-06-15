@@ -11,7 +11,7 @@ import { memo } from 'react';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const NavigationComponent = () => {
+export const NavigationComponent = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="BottomTabs">
