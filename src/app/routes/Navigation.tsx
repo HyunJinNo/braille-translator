@@ -7,10 +7,11 @@ import { HangulImageTranslationScreen } from '@src/pages/hangulImageTranslation'
 import { BrailleImageTranslationScreen } from '@src/pages/brailleImageTranslation';
 import { HangulCameraTranslationScreen } from '@src/pages/hangulCameraTranslation';
 import { BrailleCameraTranslationScreen } from '@src/pages/brailleCameraTranslation';
+import { memo } from 'react';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-export const Navigation = () => {
+const NavigationComponent = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="BottomTabs">
@@ -51,3 +52,5 @@ export const Navigation = () => {
     </NavigationContainer>
   );
 };
+
+export const Navigation = memo(NavigationComponent);
