@@ -8,11 +8,13 @@ interface ControlBarProps {
   isPlayButtonActive: boolean;
   isSnapshotButtonActive: boolean;
   isStopButtonActive: boolean;
+  isSaveButtonActive?: boolean;
   onHighlightButtonPress: () => void;
   onEditButtonPress?: () => void;
   onPlayButtonPress: () => void;
   onSnapshotButtonPress: () => void;
   onStopButtonPress: () => void;
+  onSaveButtonPress?: () => void;
 }
 
 export const ControlBar = ({
@@ -21,11 +23,13 @@ export const ControlBar = ({
   isPlayButtonActive,
   isSnapshotButtonActive,
   isStopButtonActive,
+  isSaveButtonActive,
   onHighlightButtonPress,
   onEditButtonPress,
   onPlayButtonPress,
   onSnapshotButtonPress,
   onStopButtonPress,
+  onSaveButtonPress,
 }: ControlBarProps) => {
   return (
     <View style={tw`h-15 flex flex-row items-center gap-3 bg-white`}>
@@ -66,6 +70,15 @@ export const ControlBar = ({
         isActive={isStopButtonActive}
         onPress={onStopButtonPress}
       />
+      {isSaveButtonActive !== undefined && onSaveButtonPress !== undefined && (
+        <ControlBarButton
+          imageSource={require('@assets/icon/save-icon-clickable.png')}
+          pressedImageSource={require('@assets/icon/save-icon-active.png')}
+          disabledImageSource={require('@assets/icon/save-icon-disabled.png')}
+          isActive={isSaveButtonActive}
+          onPress={onSaveButtonPress}
+        />
+      )}
     </View>
   );
 };

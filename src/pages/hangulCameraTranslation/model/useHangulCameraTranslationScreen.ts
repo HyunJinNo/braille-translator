@@ -7,7 +7,8 @@ import {
   saveHangulToBrailleHistory,
   translate,
 } from '@src/features/hangulToBraille';
-import { useEffect, useReducer, useRef, useState } from 'react';
+import { ToastDispatcherContext } from '@src/shared/model';
+import { useContext, useEffect, useReducer, useRef, useState } from 'react';
 import { LayoutChangeEvent } from 'react-native';
 import {
   Camera,
@@ -27,6 +28,7 @@ type State = {
   isPlayButtonActive: boolean;
   isSnapshotButtonActive: boolean;
   isStopButtonActive: boolean;
+  isSaveButtonActive: boolean;
 };
 
 type Action =
@@ -55,6 +57,7 @@ const reducer = (state: State, action: Action): State => {
         isPlayButtonActive: false,
         isSnapshotButtonActive: false,
         isStopButtonActive: true,
+        isSaveButtonActive: false,
       };
     case 'EDIT_BUTTON_PRESS':
       return {
@@ -65,6 +68,7 @@ const reducer = (state: State, action: Action): State => {
         isPlayButtonActive: false,
         isSnapshotButtonActive: false,
         isStopButtonActive: true,
+        isSaveButtonActive: false,
       };
     case 'PLAY_BUTTON_PRESS':
       return {
@@ -78,6 +82,7 @@ const reducer = (state: State, action: Action): State => {
         isPlayButtonActive: false,
         isSnapshotButtonActive: true,
         isStopButtonActive: true,
+        isSaveButtonActive: false,
       };
     case 'SNAPSHOT_BUTTON_PRESS':
       return {
@@ -88,6 +93,7 @@ const reducer = (state: State, action: Action): State => {
         isPlayButtonActive: true,
         isSnapshotButtonActive: false,
         isStopButtonActive: false,
+        isSaveButtonActive: action.payload.isHighlightButtonActive,
       };
     case 'STOP_BUTTON_PRESS':
       return {
@@ -99,6 +105,7 @@ const reducer = (state: State, action: Action): State => {
         isPlayButtonActive: true,
         isSnapshotButtonActive: false,
         isStopButtonActive: false,
+        isSaveButtonActive: action.payload.isHighlightButtonActive,
       };
     case 'START_ANALYZING':
       return {
@@ -141,10 +148,12 @@ export const useHangulCameraTranslationScreen = () => {
     isPlayButtonActive: true,
     isSnapshotButtonActive: false,
     isStopButtonActive: false,
+    isSaveButtonActive: false,
   });
 
   const [cameraViewWidth, setCameraViewWidth] = useState(0);
   const [cameraViewHeight, setCameraViewHeight] = useState(0);
+  const { setToastMessage } = useContext(ToastDispatcherContext);
 
   const handleLayout = (event: LayoutChangeEvent) => {
     const { width, height } = event.nativeEvent.layout;
@@ -212,8 +221,6 @@ export const useHangulCameraTranslationScreen = () => {
       type: 'SNAPSHOT_BUTTON_PRESS',
       payload: { isHighlightButtonActive: textRecognitionResult.text !== '' },
     });
-
-    saveHangulToBrailleHistory(textRecognitionResult.text, translatedResult);
   };
 
   const handleStopButtonPress = () => {
@@ -221,6 +228,11 @@ export const useHangulCameraTranslationScreen = () => {
       type: 'STOP_BUTTON_PRESS',
       payload: { isHighlightButtonActive: state.recognizedText !== '' },
     });
+  };
+
+  const handleSaveButtonPress = () => {
+    saveHangulToBrailleHistory(state.recognizedText, state.translatedText);
+    setToastMessage('번역 기록을 저장하였습니다.');
   };
 
   const handleRecognizedTextChange = (text: string) => {
@@ -250,5 +262,6 @@ export const useHangulCameraTranslationScreen = () => {
     handleSnapshotButtonPress,
     handleStopButtonPress,
     handleRecognizedTextChange,
+    handleSaveButtonPress,
   };
 };
