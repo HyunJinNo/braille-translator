@@ -31,7 +31,7 @@ export const useHangulToBrailleHistoryScreen = () => {
     setOnlyBookmarked((value) => !value);
   };
 
-  const handleStarClick = (createdAt: string) => {
+  const handleStarButtonPress = (createdAt: string) => {
     const updatedHistoryList = [...historyList];
     const index = updatedHistoryList.findIndex(
       (history) => history.createdAt === createdAt,
@@ -51,6 +51,25 @@ export const useHangulToBrailleHistoryScreen = () => {
     setHistoryList(updatedHistoryList);
   };
 
+  const handleDeleteButtonPress = (createdAt: string) => {
+    Alert.alert('번역 기록 삭제', '정말 삭제하시겠습니까?', [
+      { text: '취소', style: 'cancel' },
+      {
+        text: '삭제',
+        onPress: () => {
+          const updatedHistoryList = historyList.filter(
+            (history) => history.createdAt !== createdAt,
+          );
+          storage.set(
+            HANGUL_TO_BRAILLE_HISTORY_KEY,
+            JSON.stringify(updatedHistoryList),
+          );
+          setHistoryList(updatedHistoryList);
+        },
+      },
+    ]);
+  };
+
   useFocusEffect(
     useCallback(() => {
       setHistoryList(
@@ -64,6 +83,7 @@ export const useHangulToBrailleHistoryScreen = () => {
     historyList,
     handleClearButtonPress,
     handleBookmarkButtonPress,
-    handleStarClick,
+    handleStarButtonPress,
+    handleDeleteButtonPress,
   };
 };
