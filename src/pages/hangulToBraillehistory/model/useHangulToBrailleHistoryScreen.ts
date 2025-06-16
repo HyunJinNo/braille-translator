@@ -14,7 +14,7 @@ export const useHangulToBrailleHistoryScreen = () => {
       '전체 기록 삭제',
       '모든 한글→점자 번역 기록을 삭제하시겠습니까?',
       [
-        { text: '취소' },
+        { text: '취소', style: 'cancel' },
         {
           text: '삭제',
           onPress: () => {
