@@ -10,7 +10,8 @@ export const BrailleToHangulHistoryScreen = () => {
     historyList,
     handleClearButtonPress,
     handleBookmarkButtonPress,
-    handleStarClick,
+    handleStarButtonPress,
+    handleDeleteButtonPress,
   } = useBrailleToHangulHistoryScreen();
 
   return (
@@ -31,7 +32,8 @@ export const BrailleToHangulHistoryScreen = () => {
             ? historyList.filter((history) => history.isBookmarked)
             : historyList
         }
-        onStarClick={handleStarClick}
+        onStarButtonPress={handleStarButtonPress}
+        onDeleteButtonPress={handleDeleteButtonPress}
       />
     </View>
   );
