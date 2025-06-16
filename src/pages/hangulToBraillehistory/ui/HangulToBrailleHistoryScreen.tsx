@@ -8,7 +8,8 @@ export const HangulToBrailleHistoryScreen = () => {
   const {
     onlyBookmarked,
     historyList,
-    handleBookmarkButtonClick,
+    handleClearButtonPress,
+    handleBookmarkButtonPress,
     handleStarClick,
   } = useHangulToBrailleHistoryScreen();
 
@@ -17,10 +18,10 @@ export const HangulToBrailleHistoryScreen = () => {
       <View style={tw`flex flex-row items-center justify-between`}>
         <Text style={tw`text-lg font-semibold`}>목록</Text>
         <View style={tw`flex flex-row items-center gap-2`}>
-          <ClearButton />
+          <ClearButton onPress={handleClearButtonPress} />
           <BookmarkButton
             isActive={onlyBookmarked}
-            onPress={handleBookmarkButtonClick}
+            onPress={handleBookmarkButtonPress}
           />
         </View>
       </View>
