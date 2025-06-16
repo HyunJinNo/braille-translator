@@ -6,11 +6,13 @@ import { HistoryNotFound } from './HistoryNotFound';
 interface HistoryItemListProps {
   historyList: History[];
   onStarClick: (createdAt: string) => void;
+  onDeleteButtonPress: (createdAt: string) => void;
 }
 
 export const HistoryItemList = ({
   historyList,
   onStarClick,
+  onDeleteButtonPress,
 }: HistoryItemListProps) => {
   return (
     <FlatList
@@ -24,6 +26,7 @@ export const HistoryItemList = ({
         <HistoryItem
           history={item}
           onStarClick={() => onStarClick(item.createdAt)}
+          onDeleteButtonPress={() => onDeleteButtonPress(item.createdAt)}
         />
       )}
       keyExtractor={(item) => item.createdAt}
