@@ -37,6 +37,7 @@ export const TranslationTextViewer = ({
           value={recognizedText}
           placeholder="인식된 글자"
           editable={recognizedTextEditable ?? false}
+          multiline={true}
         />
       </ScrollView>
       <ScrollView style={tw`h-40`}>
