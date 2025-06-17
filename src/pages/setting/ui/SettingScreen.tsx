@@ -8,16 +8,11 @@ import { FontSizeContext } from '@src/entities/fontSize';
 
 export const SettingScreen = () => {
   const { isOpen, openModal, closeModal } = useModal();
-  const { fontSize, setFontSize } = useContext(FontSizeContext);
+  const { fontSize } = useContext(FontSizeContext);
 
   return (
     <View style={tw`h-full bg-white`}>
-      <FontSizeModal
-        isOpen={isOpen}
-        fontSize={fontSize}
-        closeModal={closeModal}
-        setFontSize={setFontSize}
-      />
+      <FontSizeModal isOpen={isOpen} closeModal={closeModal} />
       <SettingButton
         source={require('@assets/icon/font-icon.png')}
         title="글자 크기"

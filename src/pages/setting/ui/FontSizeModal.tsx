@@ -1,23 +1,19 @@
-import { FontSize } from '@src/entities/fontSize';
+import { FontSizeContext } from '@src/entities/fontSize';
 import { tw } from '@src/shared/lib/utils';
 import { RadioButton } from '@src/shared/ui/button';
 import { ModalTemplate } from '@src/shared/ui/modal';
 import { TranslationTextViewer } from '@src/widgets/translationTextViewer';
+import { useContext } from 'react';
 import { Pressable, Text, View } from 'react-native';
 
 interface FontSizeModalProps {
   isOpen: boolean;
-  fontSize: FontSize;
   closeModal: () => void;
-  setFontSize: (fontSize: FontSize) => void;
 }
 
-export const FontSizeModal = ({
-  isOpen,
-  fontSize,
-  closeModal,
-  setFontSize,
-}: FontSizeModalProps) => {
+export const FontSizeModal = ({ isOpen, closeModal }: FontSizeModalProps) => {
+  const { fontSize, setFontSize } = useContext(FontSizeContext);
+
   return (
     <ModalTemplate title="글자 크기" visible={isOpen} closeModal={closeModal}>
       <View style={tw`mt-2 flex w-full flex-col`}>
