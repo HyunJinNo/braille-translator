@@ -13,6 +13,7 @@ interface SettingButtonProps {
   source: ImageSourcePropType;
   title: string;
   description: string;
+  value: string;
   onPress?: ((event: GestureResponderEvent) => void) | null;
 }
 
@@ -20,6 +21,7 @@ export const SettingButton = ({
   source,
   title,
   description,
+  value,
   onPress,
 }: SettingButtonProps) => {
   return (
@@ -31,7 +33,7 @@ export const SettingButton = ({
       <View style={tw`flex flex-col items-start gap-1`}>
         <Text style={tw`text-base font-semibold`}>{title}</Text>
         <Text style={tw`text-xs`}>{description}</Text>
-        <Text style={tw`text-xs text-blue-400`}>느림</Text>
+        <Text style={tw`text-xs text-blue-400`}>{value}</Text>
       </View>
     </Pressable>
   );

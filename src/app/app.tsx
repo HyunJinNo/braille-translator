@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Navigation } from './routes';
 import SplashScreen from 'react-native-splash-screen';
 import { ToastProvider } from '@src/shared/ui/toast';
+import { FontSizeProvider } from '@src/entities/fontSize';
 
 export const App = () => {
   useEffect(() => {
@@ -9,8 +10,10 @@ export const App = () => {
   }, []);
 
   return (
-    <ToastProvider>
-      <Navigation />
-    </ToastProvider>
+    <FontSizeProvider>
+      <ToastProvider>
+        <Navigation />
+      </ToastProvider>
+    </FontSizeProvider>
   );
 };

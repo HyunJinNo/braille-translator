@@ -3,13 +3,13 @@ import { tw } from '@src/shared/lib/utils';
 import { Image, Pressable, Text } from 'react-native';
 
 interface RadioButtonProps<T extends string> {
-  fontSize: T;
+  currentValue: T;
   value: T;
   onPress: () => void;
 }
 
 export const RadioButton = <T extends string>({
-  fontSize,
+  currentValue,
   value,
   onPress,
 }: RadioButtonProps<T>) => {
@@ -21,7 +21,7 @@ export const RadioButton = <T extends string>({
       <Image
         style={tw`h-6 w-6`}
         source={
-          fontSize === value
+          currentValue === value
             ? require('@assets/icon/radio-button-icon-active.png')
             : require('@assets/icon/radio-button-icon-inactive.png')
         }
