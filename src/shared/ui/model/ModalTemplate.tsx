@@ -20,9 +20,12 @@ export const ModalTemplate = ({
       transparent={true}
       visible={visible}
       onRequestClose={() => closeModal()}>
-      <View style={tw`flex-1 items-center justify-center bg-black/50 px-4`}>
+      <View
+        style={tw`flex-1 items-center justify-center bg-black/50 px-4`}
+        onTouchEnd={closeModal}>
         <View
-          style={tw`flex w-full flex-col items-center rounded-2xl bg-white p-4`}>
+          style={tw`flex w-full flex-col items-center rounded-2xl bg-white p-4`}
+          onTouchEnd={(e) => e.stopPropagation()}>
           <View style={tw`flex w-full flex-row items-center justify-between`}>
             <Text style={tw`text-lg font-semibold`}>{title}</Text>
             <Pressable onPress={() => closeModal()}>
