@@ -6,11 +6,6 @@ export const SettingScreen = () => {
   return (
     <View style={tw`h-full bg-white`}>
       <SettingButton
-        source={require('@assets/icon/speed-icon.png')}
-        title="음성 속도"
-        description="음성으로 읽어주는 기능의 재생 속도를 조절합니다."
-      />
-      <SettingButton
         source={require('@assets/icon/font-icon.png')}
         title="글자 크기"
         description="출력되는 글자의 크기를 조절합니다."
