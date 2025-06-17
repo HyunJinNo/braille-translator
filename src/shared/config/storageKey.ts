@@ -1,4 +1,7 @@
 export const HANGUL_TO_BRAILLE_HISTORY_KEY =
   'HANGUL_TO_BRAILLE_HISTORY' as const;
+
 export const BRAILLE_TO_HANGUL_HISTORY_KEY =
   'BRAILLE_TO_HANGUL_HISTORY' as const;
+
+export const FONT_SIZE_KEY = 'FONT_SIZE_KEY';
