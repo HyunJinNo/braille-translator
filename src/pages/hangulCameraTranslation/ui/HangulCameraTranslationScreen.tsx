@@ -13,7 +13,6 @@ export const HangulCameraTranslationScreen = () => {
     device,
     camera,
     handleLayout,
-    handleHighlightButtonPress,
     handleEditButtonPress,
     handlePlayButtonPress,
     handleSnapshotButtonPress,
@@ -39,13 +38,11 @@ export const HangulCameraTranslationScreen = () => {
       )}
       <View style={tw`bg-white px-4`}>
         <ControlBar
-          isHighlightButtonActive={state.isHighlightButtonActive}
           isEditButtonActive={state.isEditButtonActive}
           isPlayButtonActive={state.isPlayButtonActive}
           isSnapshotButtonActive={state.isSnapshotButtonActive}
           isStopButtonActive={state.isStopButtonActive}
           isSaveButtonActive={state.isSaveButtonActive}
-          onHighlightButtonPress={handleHighlightButtonPress}
           onEditButtonPress={handleEditButtonPress}
           onPlayButtonPress={handlePlayButtonPress}
           onSnapshotButtonPress={handleSnapshotButtonPress}

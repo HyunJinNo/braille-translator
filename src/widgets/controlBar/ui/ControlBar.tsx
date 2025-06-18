@@ -3,13 +3,11 @@ import { View } from 'react-native';
 import { ControlBarButton } from './ControlBarButton';
 
 interface ControlBarProps {
-  isHighlightButtonActive: boolean;
   isEditButtonActive?: boolean;
   isPlayButtonActive: boolean;
   isSnapshotButtonActive: boolean;
   isStopButtonActive: boolean;
   isSaveButtonActive?: boolean;
-  onHighlightButtonPress: () => void;
   onEditButtonPress?: () => void;
   onPlayButtonPress: () => void;
   onSnapshotButtonPress: () => void;
@@ -18,13 +16,11 @@ interface ControlBarProps {
 }
 
 export const ControlBar = ({
-  isHighlightButtonActive,
   isEditButtonActive,
   isPlayButtonActive,
   isSnapshotButtonActive,
   isStopButtonActive,
   isSaveButtonActive,
-  onHighlightButtonPress,
   onEditButtonPress,
   onPlayButtonPress,
   onSnapshotButtonPress,
@@ -33,13 +29,6 @@ export const ControlBar = ({
 }: ControlBarProps) => {
   return (
     <View style={tw`h-15 flex flex-row items-center gap-3 bg-white`}>
-      <ControlBarButton
-        imageSource={require('@assets/icon/highlight-icon-clickable.png')}
-        pressedImageSource={require('@assets/icon/highlight-icon-active.png')}
-        disabledImageSource={require('@assets/icon/highlight-icon-disabled.png')}
-        isActive={isHighlightButtonActive}
-        onPress={onHighlightButtonPress}
-      />
       {isEditButtonActive !== undefined && onEditButtonPress !== undefined && (
         <ControlBarButton
           imageSource={require('@assets/icon/edit-icon-clickable.png')}

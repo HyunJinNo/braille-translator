@@ -18,20 +18,15 @@ type State = {
   loading: boolean;
   recognizedText: string;
   translatedText: string;
-  isHighlightButtonActive: boolean;
   isPlayButtonActive: boolean;
   isSnapshotButtonActive: boolean;
   isStopButtonActive: boolean;
 };
 
 type Action =
-  | { type: 'HIGHLIGHT_BUTTON_PRESS' }
   | { type: 'PLAY_BUTTON_PRESS' }
-  | {
-      type: 'SNAPSHOT_BUTTON_PRESS';
-      payload: { isHighlightButtonActive: boolean };
-    }
-  | { type: 'STOP_BUTTON_PRESS'; payload: { isHighlightButtonActive: boolean } }
+  | { type: 'SNAPSHOT_BUTTON_PRESS' }
+  | { type: 'STOP_BUTTON_PRESS' }
   | { type: 'START_ANALYZING'; payload: { imageURL: string } }
   | {
       type: 'FINISH_ANALYZING';
@@ -40,14 +35,6 @@ type Action =
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case 'HIGHLIGHT_BUTTON_PRESS':
-      return {
-        ...state,
-        isHighlightButtonActive: true,
-        isPlayButtonActive: false,
-        isSnapshotButtonActive: false,
-        isStopButtonActive: true,
-      };
     case 'PLAY_BUTTON_PRESS':
       return {
         ...state,
@@ -55,7 +42,6 @@ const reducer = (state: State, action: Action): State => {
         recognizedText: '',
         translatedText: '',
         isCameraActive: true,
-        isHighlightButtonActive: false,
         isPlayButtonActive: false,
         isSnapshotButtonActive: true,
         isStopButtonActive: true,
@@ -64,7 +50,6 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         isCameraActive: false,
-        isHighlightButtonActive: action.payload.isHighlightButtonActive,
         isPlayButtonActive: true,
         isSnapshotButtonActive: false,
         isStopButtonActive: false,
@@ -73,7 +58,6 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         isCameraActive: false,
-        isHighlightButtonActive: action.payload.isHighlightButtonActive,
         isPlayButtonActive: true,
         isSnapshotButtonActive: false,
         isStopButtonActive: false,
@@ -107,7 +91,6 @@ export const useBrailleCameraTranslationScreen = () => {
     loading: false,
     recognizedText: '',
     translatedText: '',
-    isHighlightButtonActive: false,
     isPlayButtonActive: true,
     isSnapshotButtonActive: false,
     isStopButtonActive: false,
@@ -122,11 +105,6 @@ export const useBrailleCameraTranslationScreen = () => {
     setCameraViewHeight(height);
   };
 
-  const handleHighlightButtonPress = () => {
-    // TODO
-    dispatch({ type: 'HIGHLIGHT_BUTTON_PRESS' });
-  };
-
   const handlePlayButtonPress = () => {
     dispatch({ type: 'PLAY_BUTTON_PRESS' });
   };
@@ -135,10 +113,7 @@ export const useBrailleCameraTranslationScreen = () => {
     const snapshot = await camera.current?.takeSnapshot();
 
     if (!snapshot) {
-      return dispatch({
-        type: 'SNAPSHOT_BUTTON_PRESS',
-        payload: { isHighlightButtonActive: false },
-      });
+      return dispatch({ type: 'SNAPSHOT_BUTTON_PRESS' });
     }
 
     dispatch({
@@ -174,19 +149,12 @@ export const useBrailleCameraTranslationScreen = () => {
       },
     });
 
-    dispatch({
-      type: 'SNAPSHOT_BUTTON_PRESS',
-      payload: { isHighlightButtonActive: data.srcText !== '' },
-    });
-
+    dispatch({ type: 'SNAPSHOT_BUTTON_PRESS' });
     saveBrailleToHangulHistory(data.srcText, data.translatedText);
   };
 
   const handleStopButtonPress = () => {
-    dispatch({
-      type: 'STOP_BUTTON_PRESS',
-      payload: { isHighlightButtonActive: state.recognizedText !== '' },
-    });
+    dispatch({ type: 'STOP_BUTTON_PRESS' });
   };
 
   useEffect(() => {
@@ -206,7 +174,6 @@ export const useBrailleCameraTranslationScreen = () => {
     device,
     camera,
     handleLayout,
-    handleHighlightButtonPress,
     handlePlayButtonPress,
     handleSnapshotButtonPress,
     handleStopButtonPress,
