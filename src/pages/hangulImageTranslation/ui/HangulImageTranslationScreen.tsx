@@ -7,27 +7,32 @@ import { TranslationTextViewer } from '@src/shared/ui/display';
 import { ControlBar } from '@src/widgets/controlBar';
 
 export const HangulImageTranslationScreen = () => {
-  const { loading, image, recognizedText, translatedText, handleImageUpload } =
-    useHangulImageTranslationScreen();
+  const {
+    state,
+    handleImageUpload,
+    handleEditButtonPress,
+    handleStopButtonPress,
+    handleSaveButtonPress,
+  } = useHangulImageTranslationScreen();
 
   return (
     <View style={tw`flex h-full flex-col justify-between bg-white`}>
-      <LoadingOverlay visible={loading} />
+      <LoadingOverlay visible={state.loading} />
       <View style={tw`flex-1 items-center justify-center bg-white`}>
-        <ImageSelector image={image} onPress={handleImageUpload} />
+        <ImageSelector image={state.imageURL} onPress={handleImageUpload} />
       </View>
       <View style={tw`px-4`}>
         <ControlBar
-          isEditButtonActive={false}
-          isStopButtonActive={false}
-          isSaveButtonActive={false}
-          onEditButtonPress={() => {}}
-          onStopButtonPress={() => {}}
-          onSaveButtonPress={() => {}}
+          isEditButtonActive={state.isEditButtonActive}
+          isStopButtonActive={state.isStopButtonActive}
+          isSaveButtonActive={state.isSaveButtonActive}
+          onEditButtonPress={handleEditButtonPress}
+          onStopButtonPress={handleStopButtonPress}
+          onSaveButtonPress={handleSaveButtonPress}
         />
         <TranslationTextViewer
-          recognizedText={recognizedText}
-          translatedText={translatedText}
+          recognizedText={state.recognizedText}
+          translatedText={state.translatedText}
         />
       </View>
     </View>

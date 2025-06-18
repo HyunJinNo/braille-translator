@@ -5,21 +5,91 @@ import {
   saveHangulToBrailleHistory,
   translate,
 } from '@src/features/hangulToBraille';
-import { useState } from 'react';
+import { ToastDispatcherContext } from '@src/shared/model';
+import { useContext, useReducer } from 'react';
 import { launchImageLibrary } from 'react-native-image-picker';
 
+type State = {
+  imageURL: string;
+  loading: boolean;
+  recognizedText: string;
+  translatedText: string;
+  isEditButtonActive: boolean;
+  isStopButtonActive: boolean;
+  isSaveButtonActive: boolean;
+};
+
+type Action =
+  | { type: 'EDIT_BUTTON_PRESS' }
+  | { type: 'STOP_BUTTON_PRESS'; payload: { isSaveButtonActive: boolean } }
+  | { type: 'START_ANALYZING'; payload: { imageURL: string } }
+  | {
+      type: 'FINISH_ANALYZING';
+      payload: { recognizedText: string; translatedText: string };
+    };
+
+const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case 'EDIT_BUTTON_PRESS':
+      return {
+        ...state,
+        isEditButtonActive: true,
+        isStopButtonActive: true,
+        isSaveButtonActive: false,
+      };
+    case 'STOP_BUTTON_PRESS':
+      return {
+        ...state,
+        isEditButtonActive: true,
+        isStopButtonActive: false,
+        isSaveButtonActive: action.payload.isSaveButtonActive,
+      };
+    case 'START_ANALYZING':
+      return {
+        ...state,
+        imageURL: action.payload.imageURL,
+        loading: true,
+        recognizedText: '',
+        translatedText: '',
+        isEditButtonActive: false,
+        isStopButtonActive: false,
+        isSaveButtonActive: false,
+      };
+    case 'FINISH_ANALYZING':
+      return {
+        ...state,
+        loading: false,
+        recognizedText: action.payload.recognizedText,
+        translatedText: action.payload.translatedText,
+        isEditButtonActive: true,
+        isStopButtonActive: false,
+        isSaveButtonActive: action.payload.recognizedText !== '',
+      };
+    default:
+      throw new Error('Unknown action type');
+  }
+};
+
 export const useHangulImageTranslationScreen = () => {
-  const [loading, setLoading] = useState(false);
-  const [image, setImage] = useState<string>();
-  const [recognizedText, setRecognizedText] = useState('');
-  const [translatedText, setTranslatedText] = useState('');
+  const { setToastMessage } = useContext(ToastDispatcherContext);
+  const [state, dispatch] = useReducer(reducer, {
+    imageURL: '',
+    loading: false,
+    recognizedText: '',
+    translatedText: '',
+    isEditButtonActive: true,
+    isStopButtonActive: false,
+    isSaveButtonActive: false,
+  });
 
   const handleImageUpload = async () => {
     const result = await launchImageLibrary({ mediaType: 'photo' });
 
     if (result.assets && result.assets[0].uri) {
-      setImage(result.assets[0].uri);
-      setLoading(true);
+      dispatch({
+        type: 'START_ANALYZING',
+        payload: { imageURL: result.assets[0].uri },
+      });
 
       const textRecognitionResult = await TextRecognition.recognize(
         result.assets[0].uri,
@@ -27,12 +97,37 @@ export const useHangulImageTranslationScreen = () => {
       );
       const translatedResult = translate(textRecognitionResult.text);
 
-      setRecognizedText(textRecognitionResult.text);
-      setTranslatedText(translatedResult);
-      setLoading(false);
-      saveHangulToBrailleHistory(textRecognitionResult.text, translatedResult);
+      dispatch({
+        type: 'FINISH_ANALYZING',
+        payload: {
+          recognizedText: textRecognitionResult.text,
+          translatedText: translatedResult,
+        },
+      });
     }
   };
 
-  return { loading, image, recognizedText, translatedText, handleImageUpload };
+  const handleEditButtonPress = () => {
+    dispatch({ type: 'EDIT_BUTTON_PRESS' });
+  };
+
+  const handleStopButtonPress = () => {
+    dispatch({
+      type: 'STOP_BUTTON_PRESS',
+      payload: { isSaveButtonActive: state.recognizedText !== '' },
+    });
+  };
+
+  const handleSaveButtonPress = () => {
+    saveHangulToBrailleHistory(state.recognizedText, state.translatedText);
+    setToastMessage('번역 기록을 저장하였습니다.');
+  };
+
+  return {
+    state,
+    handleImageUpload,
+    handleEditButtonPress,
+    handleStopButtonPress,
+    handleSaveButtonPress,
+  };
 };

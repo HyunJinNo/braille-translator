@@ -40,6 +40,8 @@ const reducer = (state: State, action: Action): State => {
         translatedText: action.payload.translatedText,
         isSaveButtonActive: action.payload.recognizedText !== '',
       };
+    default:
+      throw new Error('Unknown action type');
   }
 };
 
