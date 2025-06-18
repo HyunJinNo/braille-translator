@@ -12,7 +12,7 @@ export const HangulImageTranslationScreen = () => {
 
   return (
     <View style={tw`flex h-full flex-col justify-between bg-white`}>
-      <LoadingOverlay loading={loading} />
+      <LoadingOverlay visible={loading} />
       <View style={tw`flex-1 items-center justify-center bg-white`}>
         <ImageSelector image={image} onPress={handleImageUpload} />
       </View>

@@ -23,7 +23,7 @@ export const HangulCameraTranslationScreen = () => {
 
   return (
     <View style={tw`flex h-full flex-col justify-between bg-black`}>
-      <LoadingOverlay loading={state.loading} />
+      <LoadingOverlay visible={state.loading} />
       {state.imageURL !== '' ? (
         <Filter>
           <Image style={tw`h-full w-full`} source={{ uri: state.imageURL }} />

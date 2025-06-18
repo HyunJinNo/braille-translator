@@ -7,20 +7,23 @@ import { TranslationTextViewer } from '@src/shared/ui/display';
 import { ControlBar } from '@src/widgets/controlBar';
 
 export const BrailleImageTranslationScreen = () => {
-  const { loading, image, recognizedText, translatedText, handleImageUpload } =
+  const { state, handleImageUpload, handleSaveButtonPress } =
     useBrailleImageTranslationScreen();
 
   return (
     <View style={tw`flex h-full flex-col justify-between bg-white`}>
-      <LoadingOverlay loading={loading} />
+      <LoadingOverlay visible={state.loading} />
       <View style={tw`flex-1 items-center justify-center bg-white`}>
-        <ImageSelector image={image} onPress={handleImageUpload} />
+        <ImageSelector image={state.imageURL} onPress={handleImageUpload} />
       </View>
       <View style={tw`px-4`}>
-        <ControlBar isSaveButtonActive={false} onSaveButtonPress={() => {}} />
+        <ControlBar
+          isSaveButtonActive={state.isSaveButtonActive}
+          onSaveButtonPress={handleSaveButtonPress}
+        />
         <TranslationTextViewer
-          recognizedText={recognizedText}
-          translatedText={translatedText}
+          recognizedText={state.recognizedText}
+          translatedText={state.translatedText}
         />
       </View>
     </View>
