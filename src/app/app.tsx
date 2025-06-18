@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Navigation } from './routes';
 import SplashScreen from 'react-native-splash-screen';
 import { ToastProvider } from '@src/shared/ui/toast';
-import { FontSizeProvider } from '@src/shared/ui/provider/FontSizeProvider';
+import { FontSizeProvider } from '@src/shared/ui/provider';
 
 export const App = () => {
   useEffect(() => {
