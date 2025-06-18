@@ -13,6 +13,7 @@ export const HangulImageTranslationScreen = () => {
     handleEditButtonPress,
     handleStopButtonPress,
     handleSaveButtonPress,
+    handleRecognizedTextChange,
   } = useHangulImageTranslationScreen();
 
   return (
@@ -33,6 +34,8 @@ export const HangulImageTranslationScreen = () => {
         <TranslationTextViewer
           recognizedText={state.recognizedText}
           translatedText={state.translatedText}
+          recognizedTextEditable={state.recognizedTextEditable}
+          onChangeRecognizedText={handleRecognizedTextChange}
         />
       </View>
     </View>

@@ -14,6 +14,7 @@ type State = {
   loading: boolean;
   recognizedText: string;
   translatedText: string;
+  recognizedTextEditable: boolean;
   isEditButtonActive: boolean;
   isStopButtonActive: boolean;
   isSaveButtonActive: boolean;
@@ -26,13 +27,15 @@ type Action =
   | {
       type: 'FINISH_ANALYZING';
       payload: { recognizedText: string; translatedText: string };
-    };
+    }
+  | { type: 'CHANGE_RECOGNIZED_TEXT'; payload: { text: string } };
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'EDIT_BUTTON_PRESS':
       return {
         ...state,
+        recognizedTextEditable: true,
         isEditButtonActive: true,
         isStopButtonActive: true,
         isSaveButtonActive: false,
@@ -40,6 +43,7 @@ const reducer = (state: State, action: Action): State => {
     case 'STOP_BUTTON_PRESS':
       return {
         ...state,
+        recognizedTextEditable: false,
         isEditButtonActive: true,
         isStopButtonActive: false,
         isSaveButtonActive: action.payload.isSaveButtonActive,
@@ -65,6 +69,12 @@ const reducer = (state: State, action: Action): State => {
         isStopButtonActive: false,
         isSaveButtonActive: action.payload.recognizedText !== '',
       };
+    case 'CHANGE_RECOGNIZED_TEXT':
+      return {
+        ...state,
+        recognizedText: action.payload.text,
+        translatedText: translate(action.payload.text),
+      };
     default:
       throw new Error('Unknown action type');
   }
@@ -77,6 +87,7 @@ export const useHangulImageTranslationScreen = () => {
     loading: false,
     recognizedText: '',
     translatedText: '',
+    recognizedTextEditable: false,
     isEditButtonActive: true,
     isStopButtonActive: false,
     isSaveButtonActive: false,
@@ -123,11 +134,16 @@ export const useHangulImageTranslationScreen = () => {
     setToastMessage('번역 기록을 저장하였습니다.');
   };
 
+  const handleRecognizedTextChange = (text: string) => {
+    dispatch({ type: 'CHANGE_RECOGNIZED_TEXT', payload: { text } });
+  };
+
   return {
     state,
     handleImageUpload,
     handleEditButtonPress,
     handleStopButtonPress,
     handleSaveButtonPress,
+    handleRecognizedTextChange,
   };
 };

@@ -4,7 +4,8 @@ import {
   saveBrailleToHangulHistory,
   translate,
 } from '@src/features/brailleToHangul';
-import { useEffect, useReducer, useRef, useState } from 'react';
+import { ToastDispatcherContext } from '@src/shared/model';
+import { useContext, useEffect, useReducer, useRef, useState } from 'react';
 import { LayoutChangeEvent } from 'react-native';
 import {
   Camera,
@@ -98,6 +99,7 @@ export const useBrailleCameraTranslationScreen = () => {
 
   const [cameraViewWidth, setCameraViewWidth] = useState(0);
   const [cameraViewHeight, setCameraViewHeight] = useState(0);
+  const { setToastMessage } = useContext(ToastDispatcherContext);
 
   const handleLayout = (event: LayoutChangeEvent) => {
     const { width, height } = event.nativeEvent.layout;
@@ -151,6 +153,7 @@ export const useBrailleCameraTranslationScreen = () => {
 
     dispatch({ type: 'SNAPSHOT_BUTTON_PRESS' });
     saveBrailleToHangulHistory(data.srcText, data.translatedText);
+    setToastMessage('번역 기록을 저장하였습니다.');
   };
 
   const handleStopButtonPress = () => {

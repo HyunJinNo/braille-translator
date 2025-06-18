@@ -17,7 +17,7 @@ export const ImageSelector = ({ image, onPress }: ImageSelectorProps) => {
       onPress={onPress}>
       {image ? (
         <Image
-          style={tw`h-80 w-80 rounded-2xl border-2 border-fuchsia-400`}
+          style={tw`h-72 w-72 rounded-2xl border-2 border-fuchsia-400`}
           source={{ uri: image }}
         />
       ) : (
