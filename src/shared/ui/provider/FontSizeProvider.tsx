@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { FontSize, FontSizeContext } from '../model/fontSizeContext';
 import { storage } from '@src/shared/lib/utils';
 import { FONT_SIZE_KEY } from '@src/shared/config';
+import { FontSize, FontSizeContext } from '@src/shared/model';
 
 interface FontSizeProviderProps {
   children: React.ReactNode;

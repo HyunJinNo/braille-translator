@@ -1,11 +1,11 @@
 import { tw } from '@src/shared/lib/utils';
 import { LoadingOverlay } from '@src/shared/ui/overlay';
 import { ControlBar } from '@src/widgets/controlBar';
-import { TranslationTextViewer } from '@src/widgets/translationTextViewer';
 import { Image, View } from 'react-native';
 import { CameraView } from '@src/widgets/cameraView';
 import { Filter } from '@src/shared/ui/filter';
 import { useBrailleCameraTranslationScreen } from '../model/useBrailleCameraTranslationScreen';
+import { TranslationTextViewer } from '@src/shared/ui/display';
 
 export const BrailleCameraTranslationScreen = () => {
   const {

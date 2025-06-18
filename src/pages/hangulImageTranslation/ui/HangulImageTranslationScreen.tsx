@@ -1,9 +1,9 @@
 import { tw } from '@src/shared/lib/utils';
 import { LoadingOverlay } from '@src/shared/ui/overlay';
 import { ImageSelector } from '@src/widgets/imageSelector';
-import { TranslationTextViewer } from '@src/widgets/translationTextViewer';
 import { View } from 'react-native';
 import { useHangulImageTranslationScreen } from '../model/useHangulImageTranslationScreen';
+import { TranslationTextViewer } from '@src/shared/ui/display';
 
 export const HangulImageTranslationScreen = () => {
   const { loading, image, recognizedText, translatedText, handleImageUpload } =

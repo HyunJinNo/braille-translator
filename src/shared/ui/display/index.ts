@@ -1,0 +1,1 @@
+export { TranslationTextViewer } from './TranslationTextViewer';

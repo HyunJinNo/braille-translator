@@ -4,7 +4,7 @@ import { SettingButton } from '@src/shared/ui/button';
 import { View } from 'react-native';
 import { FontSizeModal } from './FontSizeModal';
 import { useContext } from 'react';
-import { FontSizeContext } from '@src/entities/fontSize';
+import { FontSizeContext } from '@src/shared/model';
 
 export const SettingScreen = () => {
   const { isOpen, openModal, closeModal } = useModal();

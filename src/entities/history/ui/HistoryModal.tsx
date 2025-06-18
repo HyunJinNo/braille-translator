@@ -1,6 +1,6 @@
 import { tw } from '@src/shared/lib/utils';
+import { TranslationTextViewer } from '@src/shared/ui/display';
 import { ModalTemplate } from '@src/shared/ui/modal';
-import { TranslationTextViewer } from '@src/widgets/translationTextViewer';
 import { View } from 'react-native';
 
 interface HistoryModalProps {
