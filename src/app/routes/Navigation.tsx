@@ -31,7 +31,6 @@ export const NavigationComponent = () => {
           options={{
             title: '점자 이미지 번역',
             headerTitleStyle: tw`text-lg`,
-            headerTransparent: true,
           }}
         />
         <Stack.Screen
@@ -45,7 +44,6 @@ export const NavigationComponent = () => {
           options={{
             title: '한글 이미지 번역',
             headerTitleStyle: tw`text-lg`,
-            headerTransparent: true,
           }}
         />
       </Stack.Navigator>

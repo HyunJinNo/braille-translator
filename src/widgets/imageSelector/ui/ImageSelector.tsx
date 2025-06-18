@@ -11,7 +11,7 @@ export const ImageSelector = ({ image, onPress }: ImageSelectorProps) => {
   return (
     <Pressable
       style={tw.style(
-        'flex h-80 w-80 items-center justify-center rounded-2xl border border-dashed border-gray-400 bg-gray-100',
+        'h-72 w-72 items-center justify-center rounded-2xl border border-dashed border-gray-400 bg-gray-100',
       )}
       android_ripple={{ color: COLOR['gray-200'] }}
       onPress={onPress}>
