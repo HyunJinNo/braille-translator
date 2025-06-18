@@ -16,6 +16,7 @@ export const BrailleCameraTranslationScreen = () => {
     handlePlayButtonPress,
     handleSnapshotButtonPress,
     handleStopButtonPress,
+    handleSaveButtonPress,
   } = useBrailleCameraTranslationScreen();
 
   return (
@@ -38,9 +39,11 @@ export const BrailleCameraTranslationScreen = () => {
           isPlayButtonActive={state.isPlayButtonActive}
           isSnapshotButtonActive={state.isSnapshotButtonActive}
           isStopButtonActive={state.isStopButtonActive}
+          isSaveButtonActive={state.isSaveButtonActive}
           onPlayButtonPress={handlePlayButtonPress}
           onSnapshotButtonPress={handleSnapshotButtonPress}
           onStopButtonPress={handleStopButtonPress}
+          onSaveButtonPress={handleSaveButtonPress}
         />
         <TranslationTextViewer
           recognizedText={state.recognizedText}
