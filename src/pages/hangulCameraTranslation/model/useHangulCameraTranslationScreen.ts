@@ -23,7 +23,6 @@ type State = {
   recognizedText: string;
   translatedText: string;
   recognizedTextEditable: boolean;
-  isHighlightButtonActive: boolean;
   isEditButtonActive: boolean;
   isPlayButtonActive: boolean;
   isSnapshotButtonActive: boolean;
@@ -32,14 +31,13 @@ type State = {
 };
 
 type Action =
-  | { type: 'HIGHLIGHT_BUTTON_PRESS' }
   | { type: 'EDIT_BUTTON_PRESS' }
   | { type: 'PLAY_BUTTON_PRESS' }
   | {
       type: 'SNAPSHOT_BUTTON_PRESS';
-      payload: { isHighlightButtonActive: boolean };
+      payload: { isSaveButtonActive: boolean };
     }
-  | { type: 'STOP_BUTTON_PRESS'; payload: { isHighlightButtonActive: boolean } }
+  | { type: 'STOP_BUTTON_PRESS'; payload: { isSaveButtonActive: boolean } }
   | { type: 'START_ANALYZING'; payload: { imageURL: string } }
   | {
       type: 'FINISH_ANALYZING';
@@ -49,21 +47,10 @@ type Action =
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case 'HIGHLIGHT_BUTTON_PRESS':
-      return {
-        ...state,
-        isHighlightButtonActive: true,
-        isEditButtonActive: false,
-        isPlayButtonActive: false,
-        isSnapshotButtonActive: false,
-        isStopButtonActive: true,
-        isSaveButtonActive: false,
-      };
     case 'EDIT_BUTTON_PRESS':
       return {
         ...state,
         recognizedTextEditable: true,
-        isHighlightButtonActive: false,
         isEditButtonActive: true,
         isPlayButtonActive: false,
         isSnapshotButtonActive: false,
@@ -77,7 +64,6 @@ const reducer = (state: State, action: Action): State => {
         recognizedText: '',
         translatedText: '',
         isCameraActive: true,
-        isHighlightButtonActive: false,
         isEditButtonActive: false,
         isPlayButtonActive: false,
         isSnapshotButtonActive: true,
@@ -88,24 +74,22 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         isCameraActive: false,
-        isHighlightButtonActive: action.payload.isHighlightButtonActive,
         isEditButtonActive: true,
         isPlayButtonActive: true,
         isSnapshotButtonActive: false,
         isStopButtonActive: false,
-        isSaveButtonActive: action.payload.isHighlightButtonActive,
+        isSaveButtonActive: action.payload.isSaveButtonActive,
       };
     case 'STOP_BUTTON_PRESS':
       return {
         ...state,
         isCameraActive: false,
         recognizedTextEditable: false,
-        isHighlightButtonActive: action.payload.isHighlightButtonActive,
         isEditButtonActive: true,
         isPlayButtonActive: true,
         isSnapshotButtonActive: false,
         isStopButtonActive: false,
-        isSaveButtonActive: action.payload.isHighlightButtonActive,
+        isSaveButtonActive: action.payload.isSaveButtonActive,
       };
     case 'START_ANALYZING':
       return {
@@ -143,7 +127,6 @@ export const useHangulCameraTranslationScreen = () => {
     recognizedText: '',
     translatedText: '',
     recognizedTextEditable: false,
-    isHighlightButtonActive: false,
     isEditButtonActive: true,
     isPlayButtonActive: true,
     isSnapshotButtonActive: false,
@@ -161,11 +144,6 @@ export const useHangulCameraTranslationScreen = () => {
     setCameraViewHeight(height);
   };
 
-  const handleHighlightButtonPress = () => {
-    // TODO
-    dispatch({ type: 'HIGHLIGHT_BUTTON_PRESS' });
-  };
-
   const handleEditButtonPress = () => {
     dispatch({ type: 'EDIT_BUTTON_PRESS' });
   };
@@ -180,7 +158,7 @@ export const useHangulCameraTranslationScreen = () => {
     if (!snapshot) {
       return dispatch({
         type: 'SNAPSHOT_BUTTON_PRESS',
-        payload: { isHighlightButtonActive: false },
+        payload: { isSaveButtonActive: false },
       });
     }
 
@@ -219,14 +197,14 @@ export const useHangulCameraTranslationScreen = () => {
 
     dispatch({
       type: 'SNAPSHOT_BUTTON_PRESS',
-      payload: { isHighlightButtonActive: textRecognitionResult.text !== '' },
+      payload: { isSaveButtonActive: textRecognitionResult.text !== '' },
     });
   };
 
   const handleStopButtonPress = () => {
     dispatch({
       type: 'STOP_BUTTON_PRESS',
-      payload: { isHighlightButtonActive: state.recognizedText !== '' },
+      payload: { isSaveButtonActive: state.recognizedText !== '' },
     });
   };
 
@@ -256,7 +234,6 @@ export const useHangulCameraTranslationScreen = () => {
     device,
     camera,
     handleLayout,
-    handleHighlightButtonPress,
     handleEditButtonPress,
     handlePlayButtonPress,
     handleSnapshotButtonPress,

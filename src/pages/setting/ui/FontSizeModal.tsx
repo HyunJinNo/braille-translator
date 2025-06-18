@@ -1,8 +1,8 @@
-import { FontSizeContext } from '@src/entities/fontSize';
 import { tw } from '@src/shared/lib/utils';
+import { FontSizeContext } from '@src/shared/model';
 import { RadioButton } from '@src/shared/ui/button';
+import { TranslationTextViewer } from '@src/shared/ui/display';
 import { ModalTemplate } from '@src/shared/ui/modal';
-import { TranslationTextViewer } from '@src/widgets/translationTextViewer';
 import { useContext } from 'react';
 import { Pressable, Text, View } from 'react-native';
 

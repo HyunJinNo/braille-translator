@@ -4,7 +4,8 @@ import {
   saveBrailleToHangulHistory,
   translate,
 } from '@src/features/brailleToHangul';
-import { useEffect, useReducer, useRef, useState } from 'react';
+import { ToastDispatcherContext } from '@src/shared/model';
+import { useContext, useEffect, useReducer, useRef, useState } from 'react';
 import { LayoutChangeEvent } from 'react-native';
 import {
   Camera,
@@ -18,20 +19,16 @@ type State = {
   loading: boolean;
   recognizedText: string;
   translatedText: string;
-  isHighlightButtonActive: boolean;
   isPlayButtonActive: boolean;
   isSnapshotButtonActive: boolean;
   isStopButtonActive: boolean;
+  isSaveButtonActive: boolean;
 };
 
 type Action =
-  | { type: 'HIGHLIGHT_BUTTON_PRESS' }
   | { type: 'PLAY_BUTTON_PRESS' }
-  | {
-      type: 'SNAPSHOT_BUTTON_PRESS';
-      payload: { isHighlightButtonActive: boolean };
-    }
-  | { type: 'STOP_BUTTON_PRESS'; payload: { isHighlightButtonActive: boolean } }
+  | { type: 'SNAPSHOT_BUTTON_PRESS'; payload: { isSaveButtonActive: boolean } }
+  | { type: 'STOP_BUTTON_PRESS' }
   | { type: 'START_ANALYZING'; payload: { imageURL: string } }
   | {
       type: 'FINISH_ANALYZING';
@@ -40,14 +37,6 @@ type Action =
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case 'HIGHLIGHT_BUTTON_PRESS':
-      return {
-        ...state,
-        isHighlightButtonActive: true,
-        isPlayButtonActive: false,
-        isSnapshotButtonActive: false,
-        isStopButtonActive: true,
-      };
     case 'PLAY_BUTTON_PRESS':
       return {
         ...state,
@@ -55,25 +44,24 @@ const reducer = (state: State, action: Action): State => {
         recognizedText: '',
         translatedText: '',
         isCameraActive: true,
-        isHighlightButtonActive: false,
         isPlayButtonActive: false,
         isSnapshotButtonActive: true,
         isStopButtonActive: true,
+        isSaveButtonActive: false,
       };
     case 'SNAPSHOT_BUTTON_PRESS':
       return {
         ...state,
         isCameraActive: false,
-        isHighlightButtonActive: action.payload.isHighlightButtonActive,
         isPlayButtonActive: true,
         isSnapshotButtonActive: false,
         isStopButtonActive: false,
+        isSaveButtonActive: action.payload.isSaveButtonActive,
       };
     case 'STOP_BUTTON_PRESS':
       return {
         ...state,
         isCameraActive: false,
-        isHighlightButtonActive: action.payload.isHighlightButtonActive,
         isPlayButtonActive: true,
         isSnapshotButtonActive: false,
         isStopButtonActive: false,
@@ -107,24 +95,20 @@ export const useBrailleCameraTranslationScreen = () => {
     loading: false,
     recognizedText: '',
     translatedText: '',
-    isHighlightButtonActive: false,
     isPlayButtonActive: true,
     isSnapshotButtonActive: false,
     isStopButtonActive: false,
+    isSaveButtonActive: false,
   });
 
   const [cameraViewWidth, setCameraViewWidth] = useState(0);
   const [cameraViewHeight, setCameraViewHeight] = useState(0);
+  const { setToastMessage } = useContext(ToastDispatcherContext);
 
   const handleLayout = (event: LayoutChangeEvent) => {
     const { width, height } = event.nativeEvent.layout;
     setCameraViewWidth(width);
     setCameraViewHeight(height);
-  };
-
-  const handleHighlightButtonPress = () => {
-    // TODO
-    dispatch({ type: 'HIGHLIGHT_BUTTON_PRESS' });
   };
 
   const handlePlayButtonPress = () => {
@@ -137,7 +121,7 @@ export const useBrailleCameraTranslationScreen = () => {
     if (!snapshot) {
       return dispatch({
         type: 'SNAPSHOT_BUTTON_PRESS',
-        payload: { isHighlightButtonActive: false },
+        payload: { isSaveButtonActive: false },
       });
     }
 
@@ -176,17 +160,19 @@ export const useBrailleCameraTranslationScreen = () => {
 
     dispatch({
       type: 'SNAPSHOT_BUTTON_PRESS',
-      payload: { isHighlightButtonActive: data.srcText !== '' },
+      payload: { isSaveButtonActive: data.srcText !== '' },
     });
-
     saveBrailleToHangulHistory(data.srcText, data.translatedText);
+    setToastMessage('번역 기록을 저장하였습니다.');
   };
 
   const handleStopButtonPress = () => {
-    dispatch({
-      type: 'STOP_BUTTON_PRESS',
-      payload: { isHighlightButtonActive: state.recognizedText !== '' },
-    });
+    dispatch({ type: 'STOP_BUTTON_PRESS' });
+  };
+
+  const handleSaveButtonPress = () => {
+    saveBrailleToHangulHistory(state.recognizedText, state.translatedText);
+    setToastMessage('번역 기록을 저장하였습니다.');
   };
 
   useEffect(() => {
@@ -206,9 +192,9 @@ export const useBrailleCameraTranslationScreen = () => {
     device,
     camera,
     handleLayout,
-    handleHighlightButtonPress,
     handlePlayButtonPress,
     handleSnapshotButtonPress,
     handleStopButtonPress,
+    handleSaveButtonPress,
   };
 };

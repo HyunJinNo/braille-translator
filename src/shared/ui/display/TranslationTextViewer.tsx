@@ -1,6 +1,6 @@
-import { FontSizeContext } from '@src/entities/fontSize';
 import { COLOR } from '@src/shared/config';
 import { tw } from '@src/shared/lib/utils';
+import { FontSizeContext } from '@src/shared/model';
 import { useContext } from 'react';
 import { ScrollView, Text, TextInput, View } from 'react-native';
 
