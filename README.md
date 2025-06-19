@@ -1,97 +1,53 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+<h1>Braille Translator - 점자 번역기</h1>
 
-# Getting Started
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/8a3ea668-057b-44d2-a789-0970f1225143" alt="logo" />
+</div>
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+<br />
 
-## Step 1: Start Metro
+<div align="center">
+  <a href="https://github.com/HyunJinNo/braille-translator/wiki" target="_blank"><img src="https://img.shields.io/badge/GitHub%20Wiki-181717?logo=github&logoColor=white"></a>
+   <a href="https://github.com/users/HyunJinNo/projects/1" target="blank"><img src="https://img.shields.io/badge/🎯Backlog%20-02B78F?logo=none&logoColor=white"></a>
+   <a href="https://www.figma.com/design/CnQv3445XcSMa0PCkq8vGg/Braille-Translator?node-id=3203-2446&t=Kit9cJsybo6PmPTA-1" target="_blank"><img src="https://img.shields.io/badge/Figma-%23F24E1E.svg?logo=figma&logoColor=white"></a>
+</div>
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+<h2>목차</h2>
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- [✅ 프로젝트 소개](#-프로젝트-소개)
+- [💾 주요 기능](#-주요-기능)
+- [✏️ 개발 기록](#️-개발-기록)
+- [🔑 트러블슈팅 해결 경험](#-트러블슈팅-해결-경험)
+- [📚 기술 스택](#-기술-스택)
 
-```sh
-# Using npm
-npm start
+<br />
+<br />
 
-# OR using Yarn
-yarn start
-```
+## ✅ 프로젝트 소개
 
-## Step 2: Build and run your app
+<br />
+<br />
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+## 💾 주요 기능
 
-### Android
+<br />
+<br />
 
-```sh
-# Using npm
-npm run android
+## ✏️ 개발 기록
 
-# OR using Yarn
-yarn android
-```
+<br />
+<br />
 
-### iOS
+## 🔑 트러블슈팅 해결 경험
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+<br />
+<br />
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+## 📚 기술 스택
 
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+| 분류                | 기술 스택                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **FE**              | ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?logo=npm&logoColor=white) ![Prettier](https://img.shields.io/badge/-Prettier-F7B93E?logo=prettier&logoColor=white) ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?logo=eslint&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=white) ![React_Native](https://img.shields.io/badge/React_Native-%2320232a.svg?logo=react&logoColor=%2361DAFB) ![Tailwind_CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=white) |
+| BE                  | ![Python](https://img.shields.io/badge/Python-3776AB?logo=Python&logoColor=FFFFFF) ![Flask](https://img.shields.io/badge/Flask-000000?logo=Flask&logoColor=FFFFFF)                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Infrastructure      | ![Raspberry_Pi](https://img.shields.io/badge/Raspberry%20Pi-A22846?logo=Raspberry%20Pi&logoColor=FFFFFF) ![Nginx](https://img.shields.io/badge/Nginx-%23009639.svg?logo=nginx&logoColor=white)                                                                                                                                                                                                                                                                                                                                                                        |
+| Collaboration Tools | ![Figma](https://img.shields.io/badge/Figma-%23F24E1E.svg?logo=figma&logoColor=white) ![GitHub](https://img.shields.io/badge/-GitHub-181717?logo=github&logoColor=white)                                                                                                                                                                                                                                                                                                                                                                                              |
