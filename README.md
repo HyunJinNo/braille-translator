@@ -3,7 +3,7 @@
 <br />
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/8a3ea668-057b-44d2-a789-0970f1225143" alt="logo" />
+  <img src="https://github.com/user-attachments/assets/d7d74c9b-1f43-4d75-8ac3-16810c36ba4a" alt="Braille Translator" />
 </div>
 
 <br />
@@ -11,7 +11,7 @@
 <div align="center">
   <a href="https://github.com/HyunJinNo/braille-translator/wiki" target="_blank"><img src="https://img.shields.io/badge/GitHub%20Wiki-181717?logo=github&logoColor=white"></a>
    <a href="https://github.com/users/HyunJinNo/projects/1" target="blank"><img src="https://img.shields.io/badge/🎯Backlog%20-02B78F?logo=none&logoColor=white"></a>
-   <a href="https://www.figma.com/design/CnQv3445XcSMa0PCkq8vGg/Braille-Translator?node-id=3203-2446&t=Kit9cJsybo6PmPTA-1" target="_blank"><img src="https://img.shields.io/badge/Figma-%23F24E1E.svg?logo=figma&logoColor=white"></a>
+   <a href="https://www.figma.com/design/CnQv3445XcSMa0PCkq8vGg/Braille-Translator?node-id=11453-4324&p=f&t=vgzXWzRxvrBMnOEq-0" target="_blank"><img src="https://img.shields.io/badge/Figma-%23F24E1E.svg?logo=figma&logoColor=white"></a>
 </div>
 
 <br />
