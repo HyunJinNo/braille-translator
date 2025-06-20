@@ -162,8 +162,6 @@ export const useBrailleCameraTranslationScreen = () => {
       type: 'SNAPSHOT_BUTTON_PRESS',
       payload: { isSaveButtonActive: data.srcText !== '' },
     });
-    saveBrailleToHangulHistory(data.srcText, data.translatedText);
-    setToastMessage('번역 기록을 저장하였습니다.');
   };
 
   const handleStopButtonPress = () => {
